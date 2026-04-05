@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <script src="script/script.js" defer></script>
+  </head>
+  <body>
+    <p id="status">Druk op play</p>
+    <button onclick="handlePlay()">Play</button>
+    <button id="stopOpname" onclick="handleStopOpname()" style="display: none">
+      Stop opname
+    </button>
+    <button id="verstuurBtn" onclick="handleVerstuur()" style="display: none">
+      Verstuur
+    </button>
+
+    <ul>
+      <li><kbd>Space</kbd> — play / pauzeer + microfoon aan</li>
+      <li><kbd>N</kbd> — opnieuw opnemen</li>
+      <li><kbd>Enter</kbd> — verstuur</li>
+    </ul>
+  </body>
+</html>
