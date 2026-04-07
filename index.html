@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +8,8 @@
     <script src="script/script.js" defer></script>
   </head>
   <body>
-    <p id="status">Druk op play</p>
+    <p id="status" aria-live="polite" aria-atomic="true">Druk op play</p>
+
     <button onclick="handlePlay()">Play</button>
     <button id="stopOpname" onclick="handleStopOpname()" style="display: none">
       Stop opname
@@ -17,10 +18,16 @@
       Verstuur
     </button>
 
-    <ul>
-      <li><kbd>Space</kbd> — play / pauzeer + microfoon aan</li>
-      <li><kbd>N</kbd> — opnieuw opnemen</li>
-      <li><kbd>Enter</kbd> — verstuur</li>
-    </ul>
+    <section aria-labelledby="sneltoetsen-titel">
+      <h2 id="sneltoetsen-titel">Sneltoetsen</h2>
+      <ul>
+        <li>
+          <kbd aria-label="Spatiebalk">Space</kbd> — play / pauzeer + microfoon
+          aan
+        </li>
+        <li><kbd aria-label="N">N</kbd> — opnieuw opnemen</li>
+        <li><kbd aria-label="Enter">Enter</kbd> — verstuur</li>
+      </ul>
+    </section>
   </body>
 </html>
