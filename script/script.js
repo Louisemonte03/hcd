@@ -1,26 +1,57 @@
 const audio = document.getElementById("audio");
 let markers = [];
 
-// ── Feedback geluiden ──
+// ── Feedback geluiden via Web Audio API ──
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playTone(frequency = 440, duration = 0.15, type = "sine") {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.type = type;
+  osc.frequency.value = frequency;
+  gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audioCtx.currentTime + duration,
+  );
+  osc.start();
+  osc.stop(audioCtx.currentTime + duration);
+}
+
 const sounds = {
-  message: new Audio("sounds/message.mp3"),
-  opnemen: new Audio("sounds/opnemen.mp3"),
-  pauze: new Audio("sounds/pauze.mp3"),
-  verstuur: new Audio("sounds/verstuur.mp3"),
-  verwijder: new Audio("sounds/Verwijder.mp3"),
+  play: () => playTone(523, 0.12), // C5 — kort en helder
+  pauze: () => playTone(392, 0.18), // G4 — iets lager
+  verstuur: () => {
+    playTone(659, 0.08);
+    setTimeout(() => playTone(784, 0.1), 90);
+  }, // E5 → G5
+  markeer: () => {
+    playTone(880, 0.08);
+    setTimeout(() => playTone(1047, 0.12), 80);
+  }, // A5 → C6
+  spring: () => {
+    playTone(784, 0.08);
+    setTimeout(() => playTone(880, 0.1), 80);
+  }, // G5 → A5
+  einde: () => {
+    playTone(523, 0.1);
+    setTimeout(() => playTone(659, 0.1), 110);
+    setTimeout(() => playTone(784, 0.15), 220);
+  }, // oplopend akkoord
 };
 
 function playSound(naam) {
-  const s = sounds[naam];
-  if (!s) return;
-  s.currentTime = 0;
-  s.play();
+  if (sounds[naam]) sounds[naam]();
 }
 
 // ── Audio metadata geladen ──
 audio.addEventListener("loadedmetadata", () => {
   updateDuration();
-  document.getElementById("progressBar").setAttribute("aria-valuemax", Math.round(audio.duration));
+  document
+    .getElementById("progressBar")
+    .setAttribute("aria-valuemax", Math.round(audio.duration));
 });
 
 // ── Waveform bars genereren ──
@@ -53,7 +84,9 @@ function updateDuration() {
 function updateProgress() {
   const progress = audio.duration ? audio.currentTime / audio.duration : 0;
   document.getElementById("progressFill").style.width = progress * 100 + "%";
-  document.getElementById("progressBar").setAttribute("aria-valuenow", Math.round(audio.currentTime));
+  document
+    .getElementById("progressBar")
+    .setAttribute("aria-valuenow", Math.round(audio.currentTime));
   updateDuration();
   updateWaveform(progress);
 }
@@ -79,15 +112,18 @@ audio.addEventListener("play", updateUI);
 audio.addEventListener("pause", updateUI);
 audio.addEventListener("ended", () => {
   updateUI();
-  playSound("opnemen");
+  playSound("einde");
   setStatus("Bericht afgespeeld", "");
 });
 
 // ── Play / Pause ──
 function togglePlay() {
+  // AudioContext moet na gebruikersinteractie worden gestart
+  if (audioCtx.state === "suspended") audioCtx.resume();
+
   if (audio.paused) {
     audio.play();
-    playSound("message");
+    playSound("play");
     setStatus("Bezig met luisteren...", "listening");
   } else {
     audio.pause();
@@ -98,23 +134,47 @@ function togglePlay() {
 
 // ── Skip ──
 function skip(seconds) {
-  audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+  audio.currentTime = Math.max(
+    0,
+    Math.min(audio.duration, audio.currentTime + seconds),
+  );
   const richting = seconds > 0 ? "vooruit" : "terug";
   setStatus(
-    Math.abs(seconds) + "s " + richting + " — positie: " + Math.round(audio.currentTime) + "s",
-    ""
+    Math.abs(seconds) +
+      "s " +
+      richting +
+      " — positie: " +
+      Math.round(audio.currentTime) +
+      "s",
+    "",
   );
 }
 
 // ── Markeer moment ──
 function markMoment() {
+  if (audioCtx.state === "suspended") audioCtx.resume();
   const t = Math.round(audio.currentTime);
   if (!markers.includes(t)) {
     markers.push(t);
     markers.sort((a, b) => a - b);
   }
+  playSound("markeer");
   setStatus("Moment gemarkeerd op " + t + "s", "marked");
   renderMarkers();
+}
+
+// ── Ga naar dichtstbijzijnde markering ──
+function goToNearestMarker() {
+  if (markers.length === 0) {
+    setStatus("Geen markeringen", "");
+    return;
+  }
+  const t = Math.round(audio.currentTime);
+  // Zoek de eerstvolgende markering, of de laatste als er geen is
+  const next = markers.find((m) => m > t) ?? markers[markers.length - 1];
+  audio.currentTime = next;
+  playSound("spring");
+  setStatus("Naar markering " + next + "s gesprongen", "");
 }
 
 function renderMarkers() {
@@ -124,9 +184,13 @@ function renderMarkers() {
     const btn = document.createElement("button");
     btn.className = "marker-badge";
     btn.textContent = "\u2691 " + t + "s";
-    btn.setAttribute("aria-label", "Spring naar markering op " + t + " seconden");
+    btn.setAttribute(
+      "aria-label",
+      "Spring naar markering op " + t + " seconden",
+    );
     btn.addEventListener("click", () => {
       audio.currentTime = t;
+      playSound("spring");
       setStatus("Naar markering " + t + "s gesprongen", "");
     });
     row.appendChild(btn);
@@ -165,6 +229,19 @@ document.addEventListener("keydown", (e) => {
     return;
   }
 
+  // Alt-combinaties
+  if (e.altKey) {
+    if (e.key === "m" || e.key === "M") {
+      e.preventDefault();
+      markMoment();
+    }
+    if (e.key === "g" || e.key === "G") {
+      e.preventDefault();
+      goToNearestMarker();
+    }
+    return;
+  }
+
   switch (e.key) {
     case " ":
       e.preventDefault();
@@ -177,6 +254,22 @@ document.addEventListener("keydown", (e) => {
     case "ArrowRight":
       e.preventDefault();
       skip(5);
+      break;
+    case "ArrowUp":
+      e.preventDefault();
+      audio.playbackRate = Math.min(
+        2,
+        parseFloat((audio.playbackRate + 0.1).toFixed(1)),
+      );
+      setStatus("Snelheid: " + audio.playbackRate + "x", "");
+      break;
+    case "ArrowDown":
+      e.preventDefault();
+      audio.playbackRate = Math.max(
+        0.5,
+        parseFloat((audio.playbackRate - 0.1).toFixed(1)),
+      );
+      setStatus("Snelheid: " + audio.playbackRate + "x", "");
       break;
     case "m":
     case "M":

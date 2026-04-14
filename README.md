@@ -106,19 +106,31 @@ Vandaag test gehad met Ihab
 
 ## week 3
 
-### Dag 5 — Maandag 0 april
-
 **Wat heb ik gedaan?**
+Keyboard-first interface uitgewerkt voor de voice memo prototype van Ihab. Ik heb een nieuw snelkoppelingensysteem bedacht en gebouwd met de volgende functies: Space voor play/pause, pijltjes voor 5 seconden voor/achteruit, Alt+M om een moment te markeren als badge, Alt+G om naar een markering te springen, T voor een AI-gegenereerde transcriptie van ~10 woorden rondom het huidige punt, R om een tekstreactie te starten (pauzeert automatisch en opent spraakherkenning indien beschikbaar) en Enter om de reactie te versturen als WhatsApp-bubbel.
+
 **Hoe lang duurde het?**
+Hele dag mee bezig geeweest
+
 **Wat heb ik geleerd?**
+Door vooraf na te denken over welke acties Ihab het vaakst nodig heeft, kon ik een logische snelkoppelingenstructuur opzetten. Het gebruik van Alt als modifier voorkomt conflicten met standaard browsergedrag.
+
 **Wat ga ik morgen doen?**
+De interface testen met Ihab en kijken waar hij vastloopt.
 
-### Dag 6 — Dinsdag 0 april
+### Dag 6 — Dinsdag 14 april
 
 **Wat heb ik gedaan?**
+Gebruikerstest gedaan met Ihab. Hieruit kwamen een aantal duidelijke bevindingen: stoppen en pauzeren moeten dezelfde knop zijn (nu beide Space), de screenreader liep steeds over de interface heen waardoor de focus management aangepast moet worden, snelkoppelingen werkten niet als de focus in een tekstveld zat, de afspeelsnelheid was te hoog voor Ihab (pijltjes omhoog/omlaag toegevoegd voor snelheidsregeling) en de markeerfunctie miste audio-feedback en navigatie. Op basis van de test heb ik de shortcutlijst bijgewerkt en een to-do opgesteld voor de vervolgstap.
+
 **Hoe lang duurde het?**
+Hele dag mee bezig geweest
+
 **Wat heb ik geleerd?**
-**Wat ga ik volgende week doen**
+Dat snelkoppelingen die logisch lijken voor een ziende gebruiker anders uitpakken voor iemand die een screenreader gebruikt. Focus management is cruciaal — als de screenreader de interface overneemt, verliest de gebruiker de context van wat er speelt. Ook bleek dat het onderscheid tussen "stoppen" en "pauzeren" voor Ihab niet relevant is; één knop werkt beter.
+
+**Wat ga ik volgende week doen?**
+Prototype verder uitwerken, README schrijven met inzichten, audio sounds toevoegen bij markering en navigatie, en focus management fixen zodat de screenreader niet over de controls heen loopt.
 
 ## Weekreflectie — Week 3
 
