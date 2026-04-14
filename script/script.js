@@ -1,12 +1,26 @@
 const audio = document.getElementById("audio");
 let markers = [];
 
+// ── Feedback geluiden ──
+const sounds = {
+  message: new Audio("sounds/message.mp3"),
+  opnemen: new Audio("sounds/opnemen.mp3"),
+  pauze: new Audio("sounds/pauze.mp3"),
+  verstuur: new Audio("sounds/verstuur.mp3"),
+  verwijder: new Audio("sounds/Verwijder.mp3"),
+};
+
+function playSound(naam) {
+  const s = sounds[naam];
+  if (!s) return;
+  s.currentTime = 0;
+  s.play();
+}
+
 // ── Audio metadata geladen ──
 audio.addEventListener("loadedmetadata", () => {
   updateDuration();
-  document
-    .getElementById("progressBar")
-    .setAttribute("aria-valuemax", Math.round(audio.duration));
+  document.getElementById("progressBar").setAttribute("aria-valuemax", Math.round(audio.duration));
 });
 
 // ── Waveform bars genereren ──
@@ -39,9 +53,7 @@ function updateDuration() {
 function updateProgress() {
   const progress = audio.duration ? audio.currentTime / audio.duration : 0;
   document.getElementById("progressFill").style.width = progress * 100 + "%";
-  document
-    .getElementById("progressBar")
-    .setAttribute("aria-valuenow", Math.round(audio.currentTime));
+  document.getElementById("progressBar").setAttribute("aria-valuenow", Math.round(audio.currentTime));
   updateDuration();
   updateWaveform(progress);
 }
@@ -67,6 +79,7 @@ audio.addEventListener("play", updateUI);
 audio.addEventListener("pause", updateUI);
 audio.addEventListener("ended", () => {
   updateUI();
+  playSound("opnemen");
   setStatus("Bericht afgespeeld", "");
 });
 
@@ -74,28 +87,22 @@ audio.addEventListener("ended", () => {
 function togglePlay() {
   if (audio.paused) {
     audio.play();
+    playSound("message");
     setStatus("Bezig met luisteren...", "listening");
   } else {
     audio.pause();
+    playSound("pauze");
     setStatus("Gepauzeerd &nbsp;— <kbd>Space</kbd> verdergaan", "");
   }
 }
 
 // ── Skip ──
 function skip(seconds) {
-  audio.currentTime = Math.max(
-    0,
-    Math.min(audio.duration, audio.currentTime + seconds),
-  );
+  audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
   const richting = seconds > 0 ? "vooruit" : "terug";
   setStatus(
-    Math.abs(seconds) +
-      "s " +
-      richting +
-      " — positie: " +
-      Math.round(audio.currentTime) +
-      "s",
-    "",
+    Math.abs(seconds) + "s " + richting + " — positie: " + Math.round(audio.currentTime) + "s",
+    ""
   );
 }
 
@@ -117,10 +124,7 @@ function renderMarkers() {
     const btn = document.createElement("button");
     btn.className = "marker-badge";
     btn.textContent = "\u2691 " + t + "s";
-    btn.setAttribute(
-      "aria-label",
-      "Spring naar markering op " + t + " seconden",
-    );
+    btn.setAttribute("aria-label", "Spring naar markering op " + t + " seconden");
     btn.addEventListener("click", () => {
       audio.currentTime = t;
       setStatus("Naar markering " + t + "s gesprongen", "");
@@ -143,6 +147,7 @@ function sendReply() {
     now.getHours() + ":" + String(now.getMinutes()).padStart(2, "0");
 
   input.value = "";
+  playSound("verstuur");
   setStatus("Reactie verstuurd ✓", "");
 }
 
