@@ -3,31 +3,113 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Voicebericht Navigator</title>
     <link rel="stylesheet" href="styles/style.css" />
-    <script src="script/script.js" defer></script>
   </head>
   <body>
-    <p id="status" aria-live="polite" aria-atomic="true">Druk op play</p>
+    <main class="wa-shell">
+      <header class="wa-header">
+        <div class="wa-avatar" aria-hidden="true">S</div>
+        <div>
+          <p class="wa-header-name">Sara</p>
+          <p class="wa-header-sub">WhatsApp prototype</p>
+        </div>
+      </header>
 
-    <button onclick="handlePlay()">Play</button>
-    <button id="stopOpname" onclick="handleStopOpname()" style="display: none">
-      Stop opname
-    </button>
-    <button id="verstuurBtn" onclick="handleVerstuur()" style="display: none">
-      Verstuur
-    </button>
+      <div class="wa-chat">
+        <div class="bubble-wrap">
+          <div
+            class="voice-bubble"
+            role="region"
+            aria-label="Voicebericht van Sara"
+          >
+            <audio id="audio" src="sounds/audio.mp3" preload="metadata"></audio>
 
-    <section aria-labelledby="sneltoetsen-titel">
-      <h2 id="sneltoetsen-titel">Sneltoetsen</h2>
-      <ul>
-        <li>
-          <kbd aria-label="Spatiebalk">Space</kbd> — play / pauzeer + microfoon
-          aan
-        </li>
-        <li><kbd aria-label="N">N</kbd> — opnieuw opnemen</li>
-        <li><kbd aria-label="Enter">Enter</kbd> — verstuur</li>
-      </ul>
-    </section>
+            <div class="voice-top">
+              <button
+                class="play-btn"
+                id="playBtn"
+                onclick="togglePlay()"
+                aria-label="Afspelen"
+                aria-pressed="false"
+              >
+                &#9654;
+              </button>
+              <div class="waveform" id="waveform" aria-hidden="true"></div>
+              <span class="voice-duration" id="durationLabel" aria-live="polite"
+                >0:00</span
+              >
+            </div>
+
+            <div class="progress-wrap">
+              <div
+                class="progress-bar"
+                id="progressBar"
+                role="slider"
+                aria-label="Voortgang voicebericht"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+                tabindex="0"
+              >
+                <div class="progress-fill" id="progressFill"></div>
+              </div>
+            </div>
+
+            <div
+              class="markers-row"
+              id="markersRow"
+              aria-live="polite"
+              aria-label="Markeringen"
+            ></div>
+          </div>
+          <span class="bubble-time">14:23</span>
+        </div>
+
+        <div class="bubble-wrap sent" id="replyWrap" style="display: none">
+          <div
+            class="reply-bubble"
+            id="replyBubble"
+            role="status"
+            aria-live="polite"
+          ></div>
+          <span class="bubble-time" id="replyTime"></span>
+        </div>
+      </div>
+
+      <div
+        class="status-bar"
+        id="statusBar"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        Druk <kbd>Space</kbd> om af te spelen
+      </div>
+
+      <div class="reply-input-row">
+        <input
+          type="text"
+          id="replyInput"
+          placeholder="Typ een reactie..."
+          aria-label="Typ een reactie"
+        />
+        <button onclick="sendReply()" aria-label="Verstuur reactie">
+          &#9658;
+        </button>
+      </div>
+
+      <section class="shortcuts" aria-label="Sneltoetsen">
+        <p class="sc-title">Sneltoetsen</p>
+        <ul class="sc-grid">
+          <li><kbd>Space</kbd> play / pause</li>
+          <li><kbd>&larr;</kbd> 5s terug</li>
+          <li><kbd>&rarr;</kbd> 5s vooruit</li>
+          <li><kbd>M</kbd> markeer moment</li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="script/script.js"></script>
   </body>
 </html>

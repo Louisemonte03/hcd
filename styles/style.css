@@ -1,46 +1,309 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font-family: sans-serif;
-  padding: 20px;
-  max-width: 320px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem 1rem;
 }
 
-button {
-  display: block;
+/* â”€â”€ Shell â”€â”€ */
+.wa-shell {
   width: 100%;
-  padding: 10px;
-  margin-top: 8px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  background: #eee;
+  max-width: 380px;
+  background: #e5ddd5;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 }
 
-#pauseBtn {
-  background: #e24b4a;
-  color: white;
+/* â”€â”€ Header â”€â”€ */
+.wa-header {
+  background: #075e54;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
 }
 
-#stopOpname {
-  background: #e24b4a;
-  color: white;
-}
-
-#status {
-  font-size: 13px;
-  color: #999;
-  margin-bottom: 8px;
-}
-
-#verstuurBtn {
+.wa-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   background: #25d366;
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.wa-header-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.wa-header-sub {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* â”€â”€ Chat area â”€â”€ */
+.wa-chat {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 200px;
+}
+
+/* â”€â”€ Bubble wrappers â”€â”€ */
+.bubble-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bubble-wrap.sent {
+  align-items: flex-end;
+}
+
+.bubble-time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 2px;
+}
+
+/* â”€â”€ Voice bubble â”€â”€ */
+.voice-bubble {
+  background: #fff;
+  border-radius: 0 10px 10px 10px;
+  padding: 10px 12px;
+  max-width: 90%;
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+/* â”€â”€ Play button â”€â”€ */
+.voice-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.play-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #075e54;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.play-btn:hover {
+  background: #0a7a6a;
+}
+
+.play-btn:focus-visible {
+  outline: 2px solid #25d366;
+  outline-offset: 2px;
+}
+
+/* â”€â”€ Waveform â”€â”€ */
+.waveform {
+  flex: 1;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.bar {
+  width: 3px;
+  border-radius: 2px;
+  background: #ccc;
+  transition: background 0.15s;
+}
+
+.bar.active {
+  background: #075e54;
+}
+
+.bar.played {
+  background: #25d366;
+}
+
+.voice-duration {
+  font-size: 12px;
+  color: #666;
+  min-width: 28px;
+  text-align: right;
+}
+
+/* â”€â”€ Progress bar â”€â”€ */
+.progress-wrap {
+  margin-top: 6px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-bar:focus-visible {
+  outline: 2px solid #25d366;
+  outline-offset: 3px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #25d366;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* â”€â”€ Markers â”€â”€ */
+.markers-row {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  min-height: 0;
+}
+
+.marker-badge {
+  background: #fff3cd;
+  border: 0.5px solid #ffc107;
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-size: 11px;
+  color: #856404;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.marker-badge:hover {
+  background: #ffe69c;
+}
+
+.marker-badge:focus-visible {
+  outline: 2px solid #ffc107;
+  outline-offset: 2px;
+}
+
+/* â”€â”€ Transcript â”€â”€ */
+.transcript-box {
+  background: #f0f0f0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: #333;
+  margin-top: 8px;
+  display: none;
+  line-height: 1.5;
+}
+
+/* â”€â”€ Reply bubble â”€â”€ */
+.reply-bubble {
+  background: #d9fdd3;
+  border-radius: 10px 0 10px 10px;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #111;
+  max-width: 85%;
+}
+
+/* â”€â”€ Status bar â”€â”€ */
+.status-bar {
+  background: #fff;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 14px;
+  font-size: 13px;
+  color: #666;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.status-bar.listening {
+  color: #075e54;
+  font-weight: 600;
+}
+
+.status-bar.marked {
+  color: #856404;
+}
+
+.status-bar kbd {
+  background: #f0f0f0;
+  border: 0.5px solid #ccc;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-family: monospace;
+  color: #333;
+}
+
+/* â”€â”€ Shortcuts â”€â”€ */
+.shortcuts {
+  padding: 10px 14px 14px;
+  background: #f7f7f7;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+.sc-title {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.sc-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px 16px;
+}
+
+.sc-grid li {
+  font-size: 12px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 kbd {
-  background: #eee;
-  border: 1px solid #ccc;
+  background: #fff;
+  border: 0.5px solid #ccc;
   border-radius: 4px;
-  padding: 2px 6px;
-  font-size: 12px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-family: monospace;
+  color: #333;
 }

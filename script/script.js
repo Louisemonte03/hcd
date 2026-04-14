@@ -1,96 +1,181 @@
-const geluidPlay = new Audio("sounds/message.mp3");
-const geluidOpnemen = new Audio("sounds/opnemen.mp3");
-const geluidPauze = new Audio("sounds/pauze.mp3");
-const geluidVerstuur = new Audio("sounds/verstuur.mp3");
-const geluidVerwijder = new Audio("sounds/Verwijder.mp3");
+const audio = document.getElementById("audio");
+let markers = [];
 
-function handlePlay() {
-  geluidPlay.play();
-  if (playing) return;
-  playing = true;
-  window.speechSynthesis.cancel(); // ← reset eerst
-  document.getElementById("status").textContent = "Bezig met luisteren...";
-  window.speechSynthesis.speak(bericht);
+// ── Audio metadata geladen ──
+audio.addEventListener("loadedmetadata", () => {
+  updateDuration();
+  document
+    .getElementById("progressBar")
+    .setAttribute("aria-valuemax", Math.round(audio.duration));
+});
+
+// ── Waveform bars genereren ──
+const waveformEl = document.getElementById("waveform");
+for (let i = 0; i < 28; i++) {
+  const h = 6 + Math.round(Math.random() * 16);
+  const bar = document.createElement("div");
+  bar.className = "bar";
+  bar.style.height = h + "px";
+  waveformEl.appendChild(bar);
 }
 
-let playing = false;
-let opgenomenTekst = "";
-
-// spraakbericht
-const bericht = new SpeechSynthesisUtterance(
-  "Hé! Hoe gaat het met je? Ik wilde je even wat vragen over het feest aankomend weekend. Heb jij al nagedacht of je komt? Want ik ben aan het plannen wie er allemaal bij zijn. Oh ja, en tweede vraag, kom je dan zaterdag of zondag? Want we twijfelen nog over de dag. En als laatste, wil je wat meenemen? Bijvoorbeeld drinken of snacks? Laat het me even weten!",
-);
-bericht.lang = "nl-NL";
-bericht.rate = 0.6;
-
-// spraakherkenning
-const herkenning = new webkitSpeechRecognition();
-herkenning.lang = "nl-NL";
-herkenning.continuous = false;
-
-herkenning.onresult = function (event) {
-  opgenomenTekst = event.results[0][0].transcript;
-  // tekst niet meer tonen
-};
-
-function handlePause() {
-  geluidPauze.play();
-  playing = false;
-  window.speechSynthesis.pause();
-  document.getElementById("status").textContent =
-    "Microfoon aan — spreek je reactie in";
-  document.getElementById("stopOpname").style.display = "block";
-  herkenning.start(); // ← microfoon gaat automatisch aan
+// ── UI updaten ──
+function updateUI() {
+  const btn = document.getElementById("playBtn");
+  const playing = !audio.paused;
+  btn.textContent = playing ? "\u23F8" : "\u25B6";
+  btn.setAttribute("aria-pressed", playing ? "true" : "false");
+  btn.setAttribute("aria-label", playing ? "Pauzeren" : "Afspelen");
 }
 
-function handleStopOpname() {
-  geluidOpnemen.play();
-  herkenning.stop(); // ← microfoon gaat uit
-  document.getElementById("status").textContent =
-    "Opname gestopt — druk Enter om te versturen";
-  document.getElementById("stopOpname").style.display = "none";
-  document.getElementById("verstuurBtn").style.display = "block";
+function updateDuration() {
+  const remaining = audio.duration
+    ? Math.round(audio.duration - audio.currentTime)
+    : 0;
+  document.getElementById("durationLabel").textContent =
+    "0:" + String(remaining).padStart(2, "0");
 }
 
-function handleOpnieuw() {
-  geluidVerwijder.play();
-  herkenning.stop();
-  opgenomenTekst = "";
-  document.getElementById("status").textContent =
-    "Microfoon aan — spreek je reactie in";
-  document.getElementById("verstuurBtn").style.display = "none";
-  document.getElementById("stopOpname").style.display = "block";
-  herkenning.start(); // ← meteen opnieuw beginnen
+function updateProgress() {
+  const progress = audio.duration ? audio.currentTime / audio.duration : 0;
+  document.getElementById("progressFill").style.width = progress * 100 + "%";
+  document
+    .getElementById("progressBar")
+    .setAttribute("aria-valuenow", Math.round(audio.currentTime));
+  updateDuration();
+  updateWaveform(progress);
 }
 
-function handleVerstuur() {
-  geluidVerstuur.play();
-  document.getElementById("status").textContent = "Reactie verstuurd!";
-  document.getElementById("verstuurBtn").style.display = "none";
-  handleGaVerder();
+function updateWaveform(progress) {
+  const bars = waveformEl.querySelectorAll(".bar");
+  const played = Math.floor(progress * bars.length);
+  bars.forEach((bar, i) => {
+    bar.className =
+      "bar" + (i < played ? " played" : !audio.paused ? " active" : "");
+  });
 }
 
-function handleGaVerder() {
-  playing = true;
-  window.speechSynthesis.resume();
-  document.getElementById("status").textContent = "Bezig met luisteren...";
+function setStatus(msg, type) {
+  const el = document.getElementById("statusBar");
+  el.innerHTML = msg;
+  el.className = "status-bar" + (type ? " " + type : "");
 }
 
-document.addEventListener("keydown", function (event) {
-  if (event.key === " ") {
-    event.preventDefault();
-    if (!playing) {
-      handlePlay();
-    } else {
-      handlePause();
-    }
+// ── Audio events ──
+audio.addEventListener("timeupdate", updateProgress);
+audio.addEventListener("play", updateUI);
+audio.addEventListener("pause", updateUI);
+audio.addEventListener("ended", () => {
+  updateUI();
+  setStatus("Bericht afgespeeld", "");
+});
+
+// ── Play / Pause ──
+function togglePlay() {
+  if (audio.paused) {
+    audio.play();
+    setStatus("Bezig met luisteren...", "listening");
+  } else {
+    audio.pause();
+    setStatus("Gepauzeerd &nbsp;— <kbd>Space</kbd> verdergaan", "");
+  }
+}
+
+// ── Skip ──
+function skip(seconds) {
+  audio.currentTime = Math.max(
+    0,
+    Math.min(audio.duration, audio.currentTime + seconds),
+  );
+  const richting = seconds > 0 ? "vooruit" : "terug";
+  setStatus(
+    Math.abs(seconds) +
+      "s " +
+      richting +
+      " — positie: " +
+      Math.round(audio.currentTime) +
+      "s",
+    "",
+  );
+}
+
+// ── Markeer moment ──
+function markMoment() {
+  const t = Math.round(audio.currentTime);
+  if (!markers.includes(t)) {
+    markers.push(t);
+    markers.sort((a, b) => a - b);
+  }
+  setStatus("Moment gemarkeerd op " + t + "s", "marked");
+  renderMarkers();
+}
+
+function renderMarkers() {
+  const row = document.getElementById("markersRow");
+  row.innerHTML = "";
+  markers.forEach((t) => {
+    const btn = document.createElement("button");
+    btn.className = "marker-badge";
+    btn.textContent = "\u2691 " + t + "s";
+    btn.setAttribute(
+      "aria-label",
+      "Spring naar markering op " + t + " seconden",
+    );
+    btn.addEventListener("click", () => {
+      audio.currentTime = t;
+      setStatus("Naar markering " + t + "s gesprongen", "");
+    });
+    row.appendChild(btn);
+  });
+}
+
+// ── Tekstreactie versturen ──
+function sendReply() {
+  const input = document.getElementById("replyInput");
+  const tekst = input.value.trim();
+  if (!tekst) return;
+
+  document.getElementById("replyBubble").textContent = tekst;
+  document.getElementById("replyWrap").style.display = "flex";
+
+  const now = new Date();
+  document.getElementById("replyTime").textContent =
+    now.getHours() + ":" + String(now.getMinutes()).padStart(2, "0");
+
+  input.value = "";
+  setStatus("Reactie verstuurd ✓", "");
+}
+
+// ── Klik op progress bar ──
+document.getElementById("progressBar").addEventListener("click", (e) => {
+  if (!audio.duration) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+});
+
+// ── Keyboard ──
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
+    if (e.key === "Enter") sendReply();
+    return;
   }
 
-  if (event.key === "n" || event.key === "N") {
-    handleOpnieuw();
-  }
-
-  if (event.key === "Enter") {
-    handleVerstuur();
+  switch (e.key) {
+    case " ":
+      e.preventDefault();
+      togglePlay();
+      break;
+    case "ArrowLeft":
+      e.preventDefault();
+      skip(-5);
+      break;
+    case "ArrowRight":
+      e.preventDefault();
+      skip(5);
+      break;
+    case "m":
+    case "M":
+      markMoment();
+      break;
   }
 });

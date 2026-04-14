@@ -98,10 +98,9 @@ Vandaag test gehad met Ihab
 **Hoe lang duurde het?**
 2 uurtjes test met ihab
 **Wat heb ik geleerd?**
-- 
 
-**Wat ga ik volgende week doen**
-Volgende weeek ga ik het verder en groter uitwerken. Weet niet of ik de geluidjes ga gebruiken of niet. Zoals dat je begint met opnemen. Maar misschien iets van spraak terug van "neem spraak opname op" ipv een kleine ssoundje 
+- **Wat ga ik volgende week doen**
+  Volgende weeek ga ik het verder en groter uitwerken. Weet niet of ik de geluidjes ga gebruiken of niet. Zoals dat je begint met opnemen. Maar misschien iets van spraak terug van "neem spraak opname op" ipv een kleine ssoundje
 
 ## Weekreflectie — Week 2
 
