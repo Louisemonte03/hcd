@@ -136,14 +136,32 @@ Prototype verder uitwerken, README schrijven met inzichten, audio sounds toevoeg
 
 ## week 4
 
-### Dag 7 — Maandag 20 april
+# Dag 7 — Maandag 20 april
 
-**Wat heb ik gedaan?**
-**Hoe lang duurde het?**
-**Wat heb ik geleerd?**
-**Wat ga ik morgen doen?**
+## Wat heb ik gedaan?
 
-### Dag 8 — Dinsdag 21  april
+Audio-ondersteuning toegevoegd via de Web Audio API. Concreet:
+
+- Geluidseffecten bij afspelen, pauzeren, versturen en springen naar markeringen
+- Snelheid aanpassen met pijltjes omhoog/omlaag
+- Escape verlaat het tekstveld en geeft spraakfeedback
+- Spraak via SpeechSynthesis bij versturen en terugkeren naar markering
+
+## Hoe lang duurde het?
+
+De hele dag.
+
+## Wat heb ik geleerd?
+
+- Hoe de Web Audio API werkt met een oscillator en gain node om tonen te genereren
+- Hoe je SpeechSynthesis combineert met UI-acties voor toegankelijke feedback
+- Hoe je keyboard events afhandelt zonder dat ze botsen met invoervelden
+
+## Wat ga ik morgen doen?
+
+Testen met Ihab.
+
+### Dag 8 — Dinsdag 21 april
 
 **Wat heb ik gedaan?**
 **Hoe lang duurde het?**
