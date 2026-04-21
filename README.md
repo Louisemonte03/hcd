@@ -136,14 +136,14 @@ Prototype verder uitwerken, README schrijven met inzichten, audio sounds toevoeg
 
 ## week 4
 
-### Dag 7 — Maandag 0 april
+### Dag 7 — Maandag 20 april
 
 **Wat heb ik gedaan?**
 **Hoe lang duurde het?**
 **Wat heb ik geleerd?**
 **Wat ga ik morgen doen?**
 
-### Dag 8 — Dinsdag 0 april
+### Dag 8 — Dinsdag 21  april
 
 **Wat heb ik gedaan?**
 **Hoe lang duurde het?**

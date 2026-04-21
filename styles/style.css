@@ -16,7 +16,7 @@ body {
   padding: 2rem 1rem;
 }
 
-/* â”€â”€ Shell â”€â”€ */
+/* ── Shell ── */
 .wa-shell {
   width: 100%;
   max-width: 380px;
@@ -26,7 +26,7 @@ body {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* â”€â”€ Header â”€â”€ */
+/* ── Header ── */
 .wa-header {
   background: #075e54;
   color: #fff;
@@ -60,7 +60,7 @@ body {
   opacity: 0.8;
 }
 
-/* â”€â”€ Chat area â”€â”€ */
+/* ── Chat area ── */
 .wa-chat {
   padding: 12px;
   display: flex;
@@ -69,7 +69,7 @@ body {
   min-height: 200px;
 }
 
-/* â”€â”€ Bubble wrappers â”€â”€ */
+/* ── Bubble wrappers ── */
 .bubble-wrap {
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ body {
   margin-top: 2px;
 }
 
-/* â”€â”€ Voice bubble â”€â”€ */
+/* ── Voice bubble ── */
 .voice-bubble {
   background: #fff;
   border-radius: 0 10px 10px 10px;
@@ -95,7 +95,7 @@ body {
   border: 0.5px solid rgba(0, 0, 0, 0.08);
 }
 
-/* â”€â”€ Play button â”€â”€ */
+/* ── Play button ── */
 .voice-top {
   display: flex;
   align-items: center;
@@ -127,7 +127,7 @@ body {
   outline-offset: 2px;
 }
 
-/* â”€â”€ Waveform â”€â”€ */
+/* ── Waveform ── */
 .waveform {
   flex: 1;
   height: 28px;
@@ -158,7 +158,7 @@ body {
   text-align: right;
 }
 
-/* â”€â”€ Progress bar â”€â”€ */
+/* ── Progress bar ── */
 .progress-wrap {
   margin-top: 6px;
 }
@@ -186,7 +186,7 @@ body {
   pointer-events: none;
 }
 
-/* â”€â”€ Markers â”€â”€ */
+/* ── Markers ── */
 .markers-row {
   display: flex;
   gap: 4px;
@@ -215,19 +215,7 @@ body {
   outline-offset: 2px;
 }
 
-/* â”€â”€ Transcript â”€â”€ */
-.transcript-box {
-  background: #f0f0f0;
-  border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 13px;
-  color: #333;
-  margin-top: 8px;
-  display: none;
-  line-height: 1.5;
-}
-
-/* â”€â”€ Reply bubble â”€â”€ */
+/* ── Reply bubble ── */
 .reply-bubble {
   background: #d9fdd3;
   border-radius: 10px 0 10px 10px;
@@ -237,7 +225,7 @@ body {
   max-width: 85%;
 }
 
-/* â”€â”€ Status bar â”€â”€ */
+/* ── Status bar ── */
 .status-bar {
   background: #fff;
   border-top: 0.5px solid rgba(0, 0, 0, 0.1);
@@ -268,7 +256,62 @@ body {
   color: #333;
 }
 
-/* â”€â”€ Shortcuts â”€â”€ */
+/* ── Reply input ── */
+.reply-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+  align-items: flex-end;
+}
+
+.reply-input-row textarea {
+  flex: 1;
+  min-height: 72px;
+  max-height: 160px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+  line-height: 1.4;
+  background: #fff;
+}
+
+.reply-input-row textarea:focus {
+  border-color: #25d366;
+  box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.2);
+}
+
+.reply-input-row button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #075e54;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.reply-input-row button:hover {
+  background: #0a7a6a;
+}
+
+.reply-input-row button:focus-visible {
+  outline: 2px solid #25d366;
+  outline-offset: 2px;
+}
+
+/* ── Shortcuts ── */
 .shortcuts {
   padding: 10px 14px 14px;
   background: #f7f7f7;

@@ -88,12 +88,12 @@
       </div>
 
       <div class="reply-input-row">
-        <input
-          type="text"
+        <textarea
           id="replyInput"
           placeholder="Typ een reactie..."
           aria-label="Typ een reactie"
-        />
+          rows="3"
+        ></textarea>
         <button onclick="sendReply()" aria-label="Verstuur reactie">
           &#9658;
         </button>
@@ -107,9 +107,11 @@
           <li><kbd>→</kbd> 5s vooruit</li>
           <li><kbd>↑</kbd> / <kbd>↓</kbd> snelheid</li>
           <li><kbd>Alt</kbd>+<kbd>M</kbd> markeer moment</li>
-          <li><kbd>Alt</kbd>+<kbd>G</kbd> ga naar markering</li>
+          <li><kbd>Alt</kbd>+<kbd>→</kbd> volgende markering</li>
+          <li><kbd>Alt</kbd>+<kbd>←</kbd> vorige markering</li>
           <li><kbd>R</kbd> start reactie</li>
           <li><kbd>Enter</kbd> verstuur reactie</li>
+          <li><kbd>Esc</kbd> terug naar speler</li>
         </ul>
       </section>
     </main>

@@ -46,6 +46,14 @@ function playSound(naam) {
   if (sounds[naam]) sounds[naam]();
 }
 
+function speak(tekst) {
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(tekst);
+  u.lang = "nl-NL";
+  u.rate = 1.1;
+  speechSynthesis.speak(u);
+}
+
 // ── Audio metadata geladen ──
 audio.addEventListener("loadedmetadata", () => {
   updateDuration();
@@ -128,7 +136,9 @@ function togglePlay() {
   } else {
     audio.pause();
     playSound("pauze");
+    const sec = Math.round(audio.currentTime);
     setStatus("Gepauzeerd &nbsp;— <kbd>Space</kbd> verdergaan", "");
+    speak("Gepauzeerd op " + sec + " seconden");
   }
 }
 
@@ -139,13 +149,9 @@ function skip(seconds) {
     Math.min(audio.duration, audio.currentTime + seconds),
   );
   const richting = seconds > 0 ? "vooruit" : "terug";
+  const pos = Math.round(audio.currentTime);
   setStatus(
-    Math.abs(seconds) +
-      "s " +
-      richting +
-      " — positie: " +
-      Math.round(audio.currentTime) +
-      "s",
+    Math.abs(seconds) + "s " + richting + " — positie: " + pos + "s",
     "",
   );
 }
@@ -163,18 +169,35 @@ function markMoment() {
   renderMarkers();
 }
 
-// ── Ga naar dichtstbijzijnde markering ──
-function goToNearestMarker() {
+// ── Volgende markering ──
+function goToNextMarker() {
   if (markers.length === 0) {
     setStatus("Geen markeringen", "");
+    speak("Geen markeringen");
     return;
   }
   const t = Math.round(audio.currentTime);
-  // Zoek de eerstvolgende markering, of de laatste als er geen is
-  const next = markers.find((m) => m > t) ?? markers[markers.length - 1];
+  const next = markers.find((m) => m > t) ?? markers[0];
   audio.currentTime = next;
   playSound("spring");
   setStatus("Naar markering " + next + "s gesprongen", "");
+  speak(next + " seconden");
+}
+
+// ── Vorige markering ──
+function goToPrevMarker() {
+  if (markers.length === 0) {
+    setStatus("Geen markeringen", "");
+    speak("Geen markeringen");
+    return;
+  }
+  const t = Math.round(audio.currentTime);
+  const prev =
+    [...markers].reverse().find((m) => m < t) ?? markers[markers.length - 1];
+  audio.currentTime = prev;
+  playSound("spring");
+  setStatus("Naar markering " + prev + "s gesprongen", "");
+  speak(prev + " seconden");
 }
 
 function renderMarkers() {
@@ -192,6 +215,7 @@ function renderMarkers() {
       audio.currentTime = t;
       playSound("spring");
       setStatus("Naar markering " + t + "s gesprongen", "");
+      speak(t + " seconden");
     });
     row.appendChild(btn);
   });
@@ -213,6 +237,7 @@ function sendReply() {
   input.value = "";
   playSound("verstuur");
   setStatus("Reactie verstuurd ✓", "");
+  speak("Reactie verstuurd");
 }
 
 // ── Klik op progress bar ──
@@ -226,18 +251,31 @@ document.getElementById("progressBar").addEventListener("click", (e) => {
 document.addEventListener("keydown", (e) => {
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
     if (e.key === "Enter") sendReply();
+    if (e.key === "Escape") {
+      e.target.blur();
+      document.getElementById("playBtn").focus();
+      setStatus(
+        "Terug naar speler &nbsp;— <kbd>Space</kbd> om af te spelen",
+        "",
+      );
+      speak("Terug naar speler");
+    }
     return;
   }
 
   // Alt-combinaties
   if (e.altKey) {
-    if (e.key === "m" || e.key === "M") {
+    if (e.code === "KeyM") {
       e.preventDefault();
       markMoment();
     }
-    if (e.key === "g" || e.key === "G") {
+    if (e.key === "ArrowRight") {
       e.preventDefault();
-      goToNearestMarker();
+      goToNextMarker();
+    }
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      goToPrevMarker();
     }
     return;
   }
@@ -274,6 +312,14 @@ document.addEventListener("keydown", (e) => {
     case "m":
     case "M":
       markMoment();
+      break;
+    case "r":
+    case "R":
+      e.preventDefault();
+      audio.pause();
+      setStatus("Typ je reactie en druk Enter om te versturen", "");
+      speak("Typ je reactie");
+      document.getElementById("replyInput").focus();
       break;
   }
 });
