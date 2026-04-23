@@ -161,11 +161,35 @@ De hele dag.
 
 Testen met Ihab.
 
-### Dag 8 — Dinsdag 21 april
+# Dag 8 — Dinsdag 21 april
 
-**Wat heb ik gedaan?**
-**Hoe lang duurde het?**
-**Wat heb ik geleerd?**
-**Wat ga ik volgende week doen**
+## Wat heb ik gedaan?
+
+Getest met Ihab. De volgende problemen zijn naar voren gekomen:
+
+- Screen reader praat te veel door de UI heen
+- Sneltoetsen worden niet goed gehighlight bovenaan de pagina
+- `Alt+M` is overbodig — `M` markeert al
+- Bug: teruggaan naar vorige markering springt naar het huidige moment in plaats van de vorige (bijv. zit op 18s, wil naar 6s, springt naar 12s)
+- Sneltoetsen werken niet in het tekstveld
+- Spatie moet `Alt+Spatie` worden zodat het ook in het tekstveld werkt
+- Focus zat niet goed bij het spraakbericht — sprong naar markering in plaats van tekstveld
+
+## Hoe lang duurde het?
+
+De hele dag.
+
+## Wat heb ik geleerd?
+
+- Testen met een echte gebruiker laat snel zien waar de prioriteiten liggen
+- Focus- en sneltoetsbeheer is complexer zodra een screen reader erbij komt
+- Kleine navigatiebugs (zoals de markering) vallen pas op in echte gebruik
+
+## Wat ga ik morgen doen?
+
+- Screen reader gedrag fixen zodat hij niet door de UI heen praat
+- Markeringnavigatie fixen (zoals Spotify: altijd écht terug naar vorige)
+- Spatie omzetten naar `Alt+Spatie` zodat het in het tekstveld werkt
+- Sneltoetsen overzicht opschonen en beter zichtbaar maken
 
 ## Weekreflectie — Week 4
