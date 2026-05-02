@@ -21,25 +21,25 @@ function playTone(frequency = 440, duration = 0.15, type = "sine") {
 }
 
 const sounds = {
-  play: () => playTone(523, 0.12), // C5 — kort en helder
-  pauze: () => playTone(392, 0.18), // G4 — iets lager
+  play: () => playTone(523, 0.12),
+  pauze: () => playTone(392, 0.18),
   verstuur: () => {
     playTone(659, 0.08);
     setTimeout(() => playTone(784, 0.1), 90);
-  }, // E5 → G5
+  },
   markeer: () => {
     playTone(880, 0.08);
     setTimeout(() => playTone(1047, 0.12), 80);
-  }, // A5 → C6
+  },
   spring: () => {
     playTone(784, 0.08);
     setTimeout(() => playTone(880, 0.1), 80);
-  }, // G5 → A5
+  },
   einde: () => {
     playTone(523, 0.1);
     setTimeout(() => playTone(659, 0.1), 110);
     setTimeout(() => playTone(784, 0.15), 220);
-  }, // oplopend akkoord
+  },
 };
 
 function playSound(naam) {
@@ -52,6 +52,10 @@ function speak(tekst) {
   u.lang = "nl-NL";
   u.rate = 1.1;
   speechSynthesis.speak(u);
+}
+
+function speakAlsPaused(tekst) {
+  if (audio.paused) speak(tekst);
 }
 
 // ── Audio metadata geladen ──
@@ -76,7 +80,7 @@ for (let i = 0; i < 28; i++) {
 function updateUI() {
   const btn = document.getElementById("playBtn");
   const playing = !audio.paused;
-  btn.textContent = playing ? "\u23F8" : "\u25B6";
+  btn.textContent = playing ? "⏸" : "▶";
   btn.setAttribute("aria-pressed", playing ? "true" : "false");
   btn.setAttribute("aria-label", playing ? "Pauzeren" : "Afspelen");
 }
@@ -122,11 +126,11 @@ audio.addEventListener("ended", () => {
   updateUI();
   playSound("einde");
   setStatus("Bericht afgespeeld", "");
+  speak("Bericht afgespeeld");
 });
 
 // ── Play / Pause ──
 function togglePlay() {
-  // AudioContext moet na gebruikersinteractie worden gestart
   if (audioCtx.state === "suspended") audioCtx.resume();
 
   if (audio.paused) {
@@ -137,7 +141,7 @@ function togglePlay() {
     audio.pause();
     playSound("pauze");
     const sec = Math.round(audio.currentTime);
-    setStatus("Gepauzeerd &nbsp;— <kbd>Space</kbd> verdergaan", "");
+    setStatus("Gepauzeerd &nbsp;— <kbd>Alt</kbd>+<kbd>Spatie</kbd> verdergaan", "");
     speak("Gepauzeerd op " + sec + " seconden");
   }
 }
@@ -154,6 +158,7 @@ function skip(seconds) {
     Math.abs(seconds) + "s " + richting + " — positie: " + pos + "s",
     "",
   );
+  speakAlsPaused(pos + " seconden");
 }
 
 // ── Markeer moment ──
@@ -166,6 +171,7 @@ function markMoment() {
   }
   playSound("markeer");
   setStatus("Moment gemarkeerd op " + t + "s", "marked");
+  speakAlsPaused("Markering op " + t + " seconden");
   renderMarkers();
 }
 
@@ -181,23 +187,35 @@ function goToNextMarker() {
   audio.currentTime = next;
   playSound("spring");
   setStatus("Naar markering " + next + "s gesprongen", "");
-  speak(next + " seconden");
+  speakAlsPaused(next + " seconden");
 }
 
-// ── Vorige markering ──
+// ── Vorige markering (Spotify-stijl: threshold 3s) ──
 function goToPrevMarker() {
   if (markers.length === 0) {
     setStatus("Geen markeringen", "");
     speak("Geen markeringen");
     return;
   }
-  const t = Math.round(audio.currentTime);
-  const prev =
-    [...markers].reverse().find((m) => m < t) ?? markers[markers.length - 1];
-  audio.currentTime = prev;
+  const t = audio.currentTime;
+  const THRESHOLD = 3;
+  const before = markers.filter((m) => m < t);
+
+  let target;
+  if (before.length === 0) {
+    target = markers[markers.length - 1];
+  } else {
+    const nearest = before[before.length - 1];
+    if (t - nearest >= THRESHOLD) {
+      target = nearest;
+    } else {
+      target = before.length > 1 ? before[before.length - 2] : markers[markers.length - 1];
+    }
+  }
+  audio.currentTime = target;
   playSound("spring");
-  setStatus("Naar markering " + prev + "s gesprongen", "");
-  speak(prev + " seconden");
+  setStatus("Naar markering " + target + "s gesprongen", "");
+  speakAlsPaused(target + " seconden");
 }
 
 function renderMarkers() {
@@ -206,11 +224,8 @@ function renderMarkers() {
   markers.forEach((t) => {
     const btn = document.createElement("button");
     btn.className = "marker-badge";
-    btn.textContent = "\u2691 " + t + "s";
-    btn.setAttribute(
-      "aria-label",
-      "Spring naar markering op " + t + " seconden",
-    );
+    btn.textContent = "⚑ " + t + "s";
+    btn.setAttribute("aria-label", "Spring naar markering op " + t + " seconden");
     btn.addEventListener("click", () => {
       audio.currentTime = t;
       playSound("spring");
@@ -250,12 +265,17 @@ document.getElementById("progressBar").addEventListener("click", (e) => {
 // ── Keyboard ──
 document.addEventListener("keydown", (e) => {
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
+    if (e.altKey && e.code === "Space") {
+      e.preventDefault();
+      togglePlay();
+      return;
+    }
     if (e.key === "Enter") sendReply();
     if (e.key === "Escape") {
       e.target.blur();
       document.getElementById("playBtn").focus();
       setStatus(
-        "Terug naar speler &nbsp;— <kbd>Space</kbd> om af te spelen",
+        "Terug naar speler &nbsp;— <kbd>Alt</kbd>+<kbd>Spatie</kbd> om af te spelen",
         "",
       );
       speak("Terug naar speler");
@@ -263,12 +283,7 @@ document.addEventListener("keydown", (e) => {
     return;
   }
 
-  // Alt-combinaties
   if (e.altKey) {
-    if (e.code === "KeyM") {
-      e.preventDefault();
-      markMoment();
-    }
     if (e.key === "ArrowRight") {
       e.preventDefault();
       goToNextMarker();

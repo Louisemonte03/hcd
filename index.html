@@ -7,114 +7,106 @@
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
-    <main class="wa-shell">
-      <header class="wa-header">
-        <div class="wa-avatar" aria-hidden="true">S</div>
-        <div>
-          <p class="wa-header-name">Lilly</p>
-          <p class="wa-header-sub">WhatsApp prototype</p>
-        </div>
-      </header>
+    <div class="layout">
 
-      <div class="wa-chat">
-        <div class="bubble-wrap">
-          <div
-            class="voice-bubble"
-            role="region"
-            aria-label="Voicebericht van Lilly"
-          >
-            <audio id="audio" src="sounds/audio.mp3" preload="metadata"></audio>
-
-            <div class="voice-top">
-              <button
-                class="play-btn"
-                id="playBtn"
-                onclick="togglePlay()"
-                aria-label="Afspelen"
-                aria-pressed="false"
-              >
-                &#9654;
-              </button>
-              <div class="waveform" id="waveform" aria-hidden="true"></div>
-              <span class="voice-duration" id="durationLabel" aria-live="polite"
-                >0:00</span
-              >
-            </div>
-
-            <div class="progress-wrap">
-              <div
-                class="progress-bar"
-                id="progressBar"
-                role="slider"
-                aria-label="Voortgang voicebericht"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                aria-valuenow="0"
-                tabindex="0"
-              >
-                <div class="progress-fill" id="progressFill"></div>
-              </div>
-            </div>
-
-            <div
-              class="markers-row"
-              id="markersRow"
-              aria-live="polite"
-              aria-label="Markeringen"
-            ></div>
-          </div>
-          <span class="bubble-time">14:23</span>
-        </div>
-
-        <div class="bubble-wrap sent" id="replyWrap" style="display: none">
-          <div
-            class="reply-bubble"
-            id="replyBubble"
-            role="status"
-            aria-live="polite"
-          ></div>
-          <span class="bubble-time" id="replyTime"></span>
-        </div>
-      </div>
-
-      <div
-        class="status-bar"
-        id="statusBar"
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        Druk <kbd>Space</kbd> om af te spelen
-      </div>
-
-      <div class="reply-input-row">
-        <textarea
-          id="replyInput"
-          placeholder="Typ een reactie..."
-          aria-label="Typ een reactie"
-          rows="3"
-        ></textarea>
-        <button onclick="sendReply()" aria-label="Verstuur reactie">
-          &#9658;
-        </button>
-      </div>
-
-      <section class="shortcuts" aria-label="Sneltoetsen">
-        <p class="sc-title">Sneltoetsen</p>
-        <ul class="sc-grid">
-          <li><kbd>Space</kbd> play / pause</li>
+      <aside class="shortcuts" aria-hidden="true">
+        <p class="sc-title">sneltoetsen</p>
+        <ul class="sc-list">
+          <li><kbd>Alt</kbd>+<kbd>⎵</kbd> play/pause</li>
           <li><kbd>←</kbd> 5s terug</li>
           <li><kbd>→</kbd> 5s vooruit</li>
-          <li><kbd>↑</kbd> / <kbd>↓</kbd> snelheid</li>
-          <li><kbd>Alt</kbd>+<kbd>M</kbd> markeer moment</li>
-          <li><kbd>Alt</kbd>+<kbd>→</kbd> volgende markering</li>
+          <li><kbd>↑↓</kbd> snelheid</li>
+          <li><kbd>M</kbd> markeer</li>
           <li><kbd>Alt</kbd>+<kbd>←</kbd> vorige markering</li>
-          <li><kbd>R</kbd> start reactie</li>
-          <li><kbd>Enter</kbd> verstuur reactie</li>
-          <li><kbd>Esc</kbd> terug naar speler</li>
+          <li><kbd>Alt</kbd>+<kbd>→</kbd> volgende markering</li>
+          <li><kbd>R</kbd> reageer</li>
+          <li><kbd>Enter</kbd> verstuur</li>
+          <li><kbd>Esc</kbd> terug</li>
         </ul>
-      </section>
-    </main>
+      </aside>
+
+      <main class="wa-shell">
+        <header class="wa-header">
+          <div class="wa-avatar" aria-hidden="true">S</div>
+          <div>
+            <p class="wa-header-name">Lilly</p>
+            <p class="wa-header-sub" id="headerSub" aria-hidden="true">WhatsApp prototype</p>
+          </div>
+        </header>
+
+        <div class="wa-chat" id="waChat">
+          <div class="bubble-wrap">
+            <div
+              class="voice-bubble"
+              role="region"
+              aria-label="Voicebericht van Lilly"
+            >
+              <audio id="audio" src="sounds/audio.mp3" preload="metadata" aria-hidden="true"></audio>
+
+              <div class="voice-top">
+                <button
+                  class="play-btn"
+                  id="playBtn"
+                  onclick="togglePlay()"
+                  aria-label="Afspelen"
+                  aria-pressed="false"
+                >
+                  &#9654;
+                </button>
+                <div class="waveform" id="waveform" aria-hidden="true"></div>
+                <span class="voice-duration" id="durationLabel" aria-hidden="true">0:00</span>
+                  </div>
+
+              <div class="progress-wrap" aria-hidden="true">
+                <div
+                  class="progress-bar"
+                  id="progressBar"
+                >
+                  <div class="progress-fill" id="progressFill"></div>
+                </div>
+              </div>
+
+              <div
+                class="markers-row"
+                id="markersRow"
+                aria-label="Markeringen"
+              ></div>
+            </div>
+            <span class="bubble-time">14:23</span>
+          </div>
+
+          <div class="bubble-wrap sent" id="replyWrap" style="display: none">
+            <div
+              class="reply-bubble"
+              id="replyBubble"
+              role="status"
+              aria-live="polite"
+            ></div>
+            <span class="bubble-time" id="replyTime"></span>
+          </div>
+        </div>
+
+        <div
+          class="status-bar"
+          id="statusBar"
+        >
+          Druk <kbd>Alt</kbd>+<kbd>Spatie</kbd> om af te spelen
+        </div>
+
+        <div class="reply-input-row">
+          <textarea
+            id="replyInput"
+            placeholder="Typ een reactie..."
+            aria-label="Typ een reactie"
+            rows="3"
+          ></textarea>
+          <button onclick="sendReply()" aria-label="Verstuur reactie">
+            &#9658;
+          </button>
+        </div>
+
+      </main>
+    </div>
 
     <script src="script/script.js"></script>
   </body>

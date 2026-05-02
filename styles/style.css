@@ -16,6 +16,60 @@ body {
   padding: 2rem 1rem;
 }
 
+/* ── Layout: legenda links, WhatsApp rechts ── */
+.layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+/* ── Shortcut legenda ── */
+.shortcuts {
+  width: 130px;
+  flex-shrink: 0;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  position: sticky;
+  top: 2rem;
+}
+
+.sc-title {
+  font-size: 9px;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.sc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sc-list li {
+  font-size: 10px;
+  color: #777;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.shortcuts kbd {
+  background: #fff;
+  border: 0.5px solid #ccc;
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: 9px;
+  font-family: monospace;
+  color: #444;
+  line-height: 1.6;
+}
+
 /* ── Shell ── */
 .wa-shell {
   width: 100%;
@@ -172,11 +226,6 @@ body {
   position: relative;
 }
 
-.progress-bar:focus-visible {
-  outline: 2px solid #25d366;
-  outline-offset: 3px;
-}
-
 .progress-fill {
   height: 100%;
   background: #25d366;
@@ -309,36 +358,6 @@ body {
 .reply-input-row button:focus-visible {
   outline: 2px solid #25d366;
   outline-offset: 2px;
-}
-
-/* ── Shortcuts ── */
-.shortcuts {
-  padding: 10px 14px 14px;
-  background: #f7f7f7;
-  border-top: 0.5px solid rgba(0, 0, 0, 0.08);
-}
-
-.sc-title {
-  font-size: 11px;
-  color: #999;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 6px;
-}
-
-.sc-grid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px 16px;
-}
-
-.sc-grid li {
-  font-size: 12px;
-  color: #555;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 kbd {

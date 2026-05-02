@@ -1,4 +1,26 @@
-# HCD
+# HCD — Voicebericht Navigator voor Ihab
+
+**Vak:** Human Centered Design  
+**Student:** Louise Monte  
+**Testpersoon:** Ihab  
+**Prototype:** Keyboard-first WhatsApp voicebericht speler
+
+---
+
+## Over het project
+
+In dit vak ontwerp je niet voor iedereen — je ontwerpt voor één specifieke persoon. Mijn testpersoon is **Ihab**, een blinde man die dagelijks het web gebruikt met een screenreader. Hij stuurt en ontvangt veel spraakberichten via WhatsApp, maar de standaard interface werkt voor hem niet goed. Dit prototype is gebouwd als een keyboard-first WhatsApp voicebericht interface die volledig werkt zonder muis.
+
+---
+
+## Exclusive Design Principles
+
+- **Study situation** — Ihab gebruikt een eigen toetsenbord en screenreader. Ik heb observaties gedaan over hoe hij spraakreacties ontvangt en wil reageren.
+- **Ignore conventions** — De standaard play/pause-knop werkt niet voor Ihab. Ik heb de volledige interface omgebouwd naar sneltoetsen.
+- **Prioritise identity** — Ihab waardeert emotie in communicatie. De interface geeft auditieve feedback via tonen én spraak, en Lilly reageert op markeringen.
+- **Add nonsense** — Wanneer Ihab een moment markeert, reageert Lilly met een willekeurige grappige reactie ("🤣 ja dat part!!", "💀", etc.) — als een echte WhatsApp-chat.
+
+---
 
 ## week 1
 
@@ -33,6 +55,8 @@ Voorbeelden van sfeergeluiden per paginatype:
 - Sport
 - Onderwijs
 - Bank / finance
+
+![Schets eerste idee Mood Intro concept](images/assets/week1-schets.svg)
 
 **Hoe lang duurde het?**
 De hele dag — introductie in de ochtend, daarna nagedacht over het concept en het idee uitgewerkt.
@@ -85,32 +109,50 @@ Volgende week ga ik onderzoeken hoe de Web Speech API werkt en wat de mogelijkhe
 Na de voorgang gesprekken die ik heb gehad met Leonie ben ik er achtergekomen dat het heel normaal is dat ik nog niks heb. Ihab is een ik wil natuurlijk maken wat goed is. Ik was nog heel erg aan het struggelen omdat ik nog geen idee heb wat ik wilde maken. Uit mijn observaties is hij opzoek wat hem helpt met spraakberichten en of ai stemmen voor screen readers. Dat lijkt voor mij best niet haalbaar, ookal wil ik hem helpen met zijn problemen. Met de voortgang gesprekken met leonie heb ben ik op nieuwe ideen gekomen. Zo zou ik misschien iets kunnen namaken dat dat iets voor whatsapp is zodat hij makkelijk zijn spraakmemo;s op stop kan zetten. Want nu als die een spraakopname krijgt dan wilt hij eig gelijk antwoord geven maar dat kan dat dus niet. Hij luisterd hem eerst helemaal af en maakt ie zelf een spraakmemo en gaat wilt hij dingen vertellen maar dan vergeet hij weer waar het over ging in de spraakmemo die die kreeg.
 Of ik ga iets maken zodat op elke pagina hij een soort intro sound hoort en dan een beetje een sfeer krijgt van de website.
 
+---
+
 ## week 2
 
 ### Dag 3 — Maandag 6 april
 
 ### Niet aanwezig want pasen
 
-### Dag 4 — Dinsdag 0 april
+### Dag 4 — Dinsdag 8 april
 
 **Wat heb ik gedaan?**
-Vandaag test gehad met Ihab
+Vandaag test gehad met Ihab.
+
+![Screenshot eerste prototype WhatsApp interface](images/assets/week2-prototype.svg)
+
 **Hoe lang duurde het?**
-2 uurtjes test met ihab
+2 uurtjes test met Ihab.
+
 **Wat heb ik geleerd?**
 
-- **Wat ga ik volgende week doen**
-  Volgende weeek ga ik het verder en groter uitwerken. Weet niet of ik de geluidjes ga gebruiken of niet. Zoals dat je begint met opnemen. Maar misschien iets van spraak terug van "neem spraak opname op" ipv een kleine ssoundje
+- Ihab wil de interface besturen met sneltoetsen, niet met de muis
+- Een WhatsApp-achtige interface voelt voor hem vertrouwd
+- Het idee van een voicebericht speler met markeer-functie slaat aan
+
+**Wat ga ik volgende week doen?**
+Volgende week ga ik het verder en groter uitwerken. Weet niet of ik de geluidjes ga gebruiken of niet. Zoals dat je begint met opnemen. Maar misschien iets van spraak terug van "neem spraak opname op" ipv een kleine soundje.
 
 ## Weekreflectie — Week 2
 
+In week 2 ben ik erachter gekomen dat het Mood Intro idee te vaag was voor Ihab — hij wilde iets concreets waarmee hij echt zijn spraakmemo's beter kan gebruiken. Het WhatsApp-interface idee voelt veel beter: het sluit aan op zijn dagelijks gebruik. Ik heb besloten om de focus te leggen op een keyboard-first voicebericht speler waarbij je met sneltoetsen kunt navigeren, markeren en reageren.
+
+---
+
 ## week 3
+
+### Dag 5 — Maandag 13 april
 
 **Wat heb ik gedaan?**
 Keyboard-first interface uitgewerkt voor de voice memo prototype van Ihab. Ik heb een nieuw snelkoppelingensysteem bedacht en gebouwd met de volgende functies: Space voor play/pause, pijltjes voor 5 seconden voor/achteruit, Alt+M om een moment te markeren als badge, Alt+G om naar een markering te springen, T voor een AI-gegenereerde transcriptie van ~10 woorden rondom het huidige punt, R om een tekstreactie te starten (pauzeert automatisch en opent spraakherkenning indien beschikbaar) en Enter om de reactie te versturen als WhatsApp-bubbel.
 
+![Shortcut overzicht / keyboard diagram](images/assets/week3-shortcuts.svg)
+
 **Hoe lang duurde het?**
-Hele dag mee bezig geeweest
+Hele dag mee bezig geweest.
 
 **Wat heb ik geleerd?**
 Door vooraf na te denken over welke acties Ihab het vaakst nodig heeft, kon ik een logische snelkoppelingenstructuur opzetten. Het gebruik van Alt als modifier voorkomt conflicten met standaard browsergedrag.
@@ -123,8 +165,10 @@ De interface testen met Ihab en kijken waar hij vastloopt.
 **Wat heb ik gedaan?**
 Gebruikerstest gedaan met Ihab. Hieruit kwamen een aantal duidelijke bevindingen: stoppen en pauzeren moeten dezelfde knop zijn (nu beide Space), de screenreader liep steeds over de interface heen waardoor de focus management aangepast moet worden, snelkoppelingen werkten niet als de focus in een tekstveld zat, de afspeelsnelheid was te hoog voor Ihab (pijltjes omhoog/omlaag toegevoegd voor snelheidsregeling) en de markeerfunctie miste audio-feedback en navigatie. Op basis van de test heb ik de shortcutlijst bijgewerkt en een to-do opgesteld voor de vervolgstap.
 
+![Foto/screenshot testsessie met Ihab week 3](images/assets/week3-test.svg)
+
 **Hoe lang duurde het?**
-Hele dag mee bezig geweest
+Hele dag mee bezig geweest.
 
 **Wat heb ik geleerd?**
 Dat snelkoppelingen die logisch lijken voor een ziende gebruiker anders uitpakken voor iemand die een screenreader gebruikt. Focus management is cruciaal — als de screenreader de interface overneemt, verliest de gebruiker de context van wat er speelt. Ook bleek dat het onderscheid tussen "stoppen" en "pauzeren" voor Ihab niet relevant is; één knop werkt beter.
@@ -134,11 +178,15 @@ Prototype verder uitwerken, README schrijven met inzichten, audio sounds toevoeg
 
 ## Weekreflectie — Week 3
 
+Week 3 was de week dat het prototype echt vorm begon te krijgen. De testsessie met Ihab was heel waardevol — ik merkte dat ik veel aannames had gemaakt over hoe hij zou navigeren. Het grootste inzicht was dat focus management alles bepaalt: als de screenreader focus heeft op een element dat ik niet verwacht, valt de hele sneltoetsstructuur weg. Ik ga volgende week de screenreader-laag echt goed aanpakken.
+
+---
+
 ## week 4
 
-# Dag 7 — Maandag 20 april
+### Dag 7 — Maandag 20 april
 
-## Wat heb ik gedaan?
+**Wat heb ik gedaan?**
 
 Audio-ondersteuning toegevoegd via de Web Audio API. Concreet:
 
@@ -147,23 +195,23 @@ Audio-ondersteuning toegevoegd via de Web Audio API. Concreet:
 - Escape verlaat het tekstveld en geeft spraakfeedback
 - Spraak via SpeechSynthesis bij versturen en terugkeren naar markering
 
-## Hoe lang duurde het?
+**Hoe lang duurde het?**
 
 De hele dag.
 
-## Wat heb ik geleerd?
+**Wat heb ik geleerd?**
 
 - Hoe de Web Audio API werkt met een oscillator en gain node om tonen te genereren
 - Hoe je SpeechSynthesis combineert met UI-acties voor toegankelijke feedback
 - Hoe je keyboard events afhandelt zonder dat ze botsen met invoervelden
 
-## Wat ga ik morgen doen?
+**Wat ga ik morgen doen?**
 
 Testen met Ihab.
 
-# Dag 8 — Dinsdag 21 april
+### Dag 8 — Dinsdag 21 april
 
-## Wat heb ik gedaan?
+**Wat heb ik gedaan?**
 
 Getest met Ihab. De volgende problemen zijn naar voren gekomen:
 
@@ -175,17 +223,21 @@ Getest met Ihab. De volgende problemen zijn naar voren gekomen:
 - Spatie moet `Alt+Spatie` worden zodat het ook in het tekstveld werkt
 - Focus zat niet goed bij het spraakbericht — sprong naar markering in plaats van tekstveld
 
-## Hoe lang duurde het?
+![Screenshot eindprototype in de browser](images/assets/week4-prototype.svg)
+
+![Screenshot waveform en markeringen](images/assets/week4-markeringen.svg)
+
+**Hoe lang duurde het?**
 
 De hele dag.
 
-## Wat heb ik geleerd?
+**Wat heb ik geleerd?**
 
 - Testen met een echte gebruiker laat snel zien waar de prioriteiten liggen
 - Focus- en sneltoetsbeheer is complexer zodra een screen reader erbij komt
 - Kleine navigatiebugs (zoals de markering) vallen pas op in echte gebruik
 
-## Wat ga ik morgen doen?
+**Wat ga ik morgen doen?**
 
 - Screen reader gedrag fixen zodat hij niet door de UI heen praat
 - Markeringnavigatie fixen (zoals Spotify: altijd écht terug naar vorige)
@@ -193,3 +245,37 @@ De hele dag.
 - Sneltoetsen overzicht opschonen en beter zichtbaar maken
 
 ## Weekreflectie — Week 4
+
+In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste verbeteringen: de screenreader leest niet meer door de hele interface heen (tabvolgorde opgeschoond, aria-live alleen op de statusbalk), de markeernavigatie werkt nu zoals Spotify — als je net voorbij een markering zit ga je terug naar de vorige, anders ga je terug naar die markering zelf. En `Alt+Spatie` werkt nu ook in het tekstveld. Tot slot is de shortcutlegenda naar boven verplaatst en heeft het prototype een grappig nonsense-element gekregen: Lilly reageert met willekeurige emoji-reacties als je een moment markeert.
+
+Er zijn nog een paar fouten is dat de screan reader over de text gaat van de gebruiker als de gebruiker iets markeert of terug markeert. Hier moet ik nog even naar kijken.
+
+---
+
+## Eindresultaat — Sneltoetsen overzicht
+
+| Toets            | Actie                            |
+| ---------------- | -------------------------------- |
+| `Alt` + `Spatie` | Play / Pause (ook in tekstveld)  |
+| `←`              | 5 seconden terug                 |
+| `→`              | 5 seconden vooruit               |
+| `↑` / `↓`        | Snelheid omhoog/omlaag           |
+| `M`              | Markeer huidig moment            |
+| `Alt` + `←`      | Vorige markering (Spotify-stijl) |
+| `Alt` + `→`      | Volgende markering               |
+| `R`              | Start tekstreactie               |
+| `Enter`          | Verstuur reactie                 |
+| `Esc`            | Terug naar speler                |
+
+---
+
+## Bronnen
+
+- Vasilis van Gemert — [Exclusive Design](https://exclusive-design.vasilis.nl/) (2018)
+- MDN Web Docs — [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
+- MDN Web Docs — [SpeechSynthesis](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis)
+- MDN Web Docs — [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent)
+- MDN Web Docs — [ARIA: role="slider"](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role)
+- W3C — [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
+- WebAIM — [Keyboard Accessibility](https://webaim.org/techniques/keyboard/)
+- Spotify — inspiratie voor markeer-navigatie gedrag (terug naar vorige markering met threshold)
