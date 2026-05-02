@@ -34,8 +34,6 @@ Voorbeelden van sfeergeluiden per paginatype:
 - Onderwijs
 - Bank / finance
 
-![Schets eerste idee Mood Intro concept](images/assets/week1-schets.svg)
-
 **Hoe lang duurde het?**
 De hele dag — introductie in de ochtend, daarna nagedacht over het concept en het idee uitgewerkt.
 
@@ -100,7 +98,7 @@ Of ik ga iets maken zodat op elke pagina hij een soort intro sound hoort en dan 
 **Wat heb ik gedaan?**
 Vandaag test gehad met Ihab.
 
-![Screenshot eerste prototype WhatsApp interface](images/assets/week2-prototype.svg)
+![Screenshot eerste prototype WhatsApp interface](images/assets/week2-protoype.svg)
 
 **Hoe lang duurde het?**
 2 uurtjes test met Ihab.
