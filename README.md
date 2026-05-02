@@ -125,7 +125,7 @@ In week 2 ben ik erachter gekomen dat het Mood Intro idee te vaag was voor Ihab 
 **Wat heb ik gedaan?**
 Keyboard-first interface uitgewerkt voor de voice memo prototype van Ihab. Ik heb een nieuw snelkoppelingensysteem bedacht en gebouwd met de volgende functies: Space voor play/pause, pijltjes voor 5 seconden voor/achteruit, Alt+M om een moment te markeren als badge, Alt+G om naar een markering te springen, T voor een AI-gegenereerde transcriptie van ~10 woorden rondom het huidige punt, R om een tekstreactie te starten (pauzeert automatisch en opent spraakherkenning indien beschikbaar) en Enter om de reactie te versturen als WhatsApp-bubbel.
 
-![Shortcut overzicht / keyboard diagram](images/assets/sneltoetsen)
+![Shortcut overzicht / keyboard diagram](images/assets/sneltoetsen.png)
 
 **Hoe lang duurde het?**
 Hele dag mee bezig geweest.
