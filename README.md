@@ -224,25 +224,6 @@ In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste ver
 
 Er zijn nog een paar fouten is dat de screan reader over de text gaat van de gebruiker als de gebruiker iets markeert of terug markeert. Hier moet ik nog even naar kijken.
 
----
-
-## Eindresultaat — Sneltoetsen overzicht
-
-| Toets            | Actie                            |
-| ---------------- | -------------------------------- |
-| `Alt` + `Spatie` | Play / Pause (ook in tekstveld)  |
-| `←`              | 5 seconden terug                 |
-| `→`              | 5 seconden vooruit               |
-| `↑` / `↓`        | Snelheid omhoog/omlaag           |
-| `M`              | Markeer huidig moment            |
-| `Alt` + `←`      | Vorige markering (Spotify-stijl) |
-| `Alt` + `→`      | Volgende markering               |
-| `R`              | Start tekstreactie               |
-| `Enter`          | Verstuur reactie                 |
-| `Esc`            | Terug naar speler                |
-
----
-
 ## Bronnen
 
 - Vasilis van Gemert — [Exclusive Design](https://exclusive-design.vasilis.nl/) (2018)
