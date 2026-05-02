@@ -98,7 +98,7 @@ Of ik ga iets maken zodat op elke pagina hij een soort intro sound hoort en dan 
 **Wat heb ik gedaan?**
 Vandaag test gehad met Ihab.
 
-![Screenshot eerste prototype WhatsApp interface](images/assets/week2-protoype.svg)
+![Screenshot eerste prototype WhatsApp interface](images/assets/eerste-idee)
 
 **Hoe lang duurde het?**
 2 uurtjes test met Ihab.
