@@ -141,7 +141,7 @@ De interface testen met Ihab en kijken waar hij vastloopt.
 **Wat heb ik gedaan?**
 Gebruikerstest gedaan met Ihab. Hieruit kwamen een aantal duidelijke bevindingen: stoppen en pauzeren moeten dezelfde knop zijn (nu beide Space), de screenreader liep steeds over de interface heen waardoor de focus management aangepast moet worden, snelkoppelingen werkten niet als de focus in een tekstveld zat, de afspeelsnelheid was te hoog voor Ihab (pijltjes omhoog/omlaag toegevoegd voor snelheidsregeling) en de markeerfunctie miste audio-feedback en navigatie. Op basis van de test heb ik de shortcutlijst bijgewerkt en een to-do opgesteld voor de vervolgstap.
 
-![Foto/screenshot testsessie met Ihab week 3](images/assets/week3-test.svg)
+![Foto/screenshot testsessie met Ihab week 3](images/assets/voorbeeld-test-documentatie.png)
 
 **Hoe lang duurde het?**
 Hele dag mee bezig geweest.
@@ -193,15 +193,13 @@ Getest met Ihab. De volgende problemen zijn naar voren gekomen:
 
 - Screen reader praat te veel door de UI heen
 - Sneltoetsen worden niet goed gehighlight bovenaan de pagina
-- `Alt+M` is overbodig — `M` markeert al
+- Alt+m is overbodig — M markeert al
 - Bug: teruggaan naar vorige markering springt naar het huidige moment in plaats van de vorige (bijv. zit op 18s, wil naar 6s, springt naar 12s)
 - Sneltoetsen werken niet in het tekstveld
-- Spatie moet `Alt+Spatie` worden zodat het ook in het tekstveld werkt
+- Spatie moet Alt+Spatie worden zodat het ook in het tekstveld werkt
 - Focus zat niet goed bij het spraakbericht — sprong naar markering in plaats van tekstveld
 
-![Screenshot eindprototype in de browser](images/assets/week4-prototype.svg)
-
-![Screenshot waveform en markeringen](images/assets/week4-markeringen.svg)
+![Screenshot eindprototype in de browser](images/assets/eindproduct.png)
 
 **Hoe lang duurde het?**
 
