@@ -1,26 +1,4 @@
-# HCD — Voicebericht Navigator voor Ihab
-
-**Vak:** Human Centered Design  
-**Student:** Louise Monte  
-**Testpersoon:** Ihab  
-**Prototype:** Keyboard-first WhatsApp voicebericht speler
-
----
-
-## Over het project
-
-In dit vak ontwerp je niet voor iedereen — je ontwerpt voor één specifieke persoon. Mijn testpersoon is **Ihab**, een blinde man die dagelijks het web gebruikt met een screenreader. Hij stuurt en ontvangt veel spraakberichten via WhatsApp, maar de standaard interface werkt voor hem niet goed. Dit prototype is gebouwd als een keyboard-first WhatsApp voicebericht interface die volledig werkt zonder muis.
-
----
-
-## Exclusive Design Principles
-
-- **Study situation** — Ihab gebruikt een eigen toetsenbord en screenreader. Ik heb observaties gedaan over hoe hij spraakreacties ontvangt en wil reageren.
-- **Ignore conventions** — De standaard play/pause-knop werkt niet voor Ihab. Ik heb de volledige interface omgebouwd naar sneltoetsen.
-- **Prioritise identity** — Ihab waardeert emotie in communicatie. De interface geeft auditieve feedback via tonen én spraak, en Lilly reageert op markeringen.
-- **Add nonsense** — Wanneer Ihab een moment markeert, reageert Lilly met een willekeurige grappige reactie ("🤣 ja dat part!!", "💀", etc.) — als een echte WhatsApp-chat.
-
----
+# HCD
 
 ## week 1
 
