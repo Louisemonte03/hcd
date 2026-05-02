@@ -233,4 +233,3 @@ Er zijn nog een paar fouten is dat de screan reader over de text gaat van de geb
 - MDN Web Docs — [ARIA: role="slider"](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role)
 - W3C — [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - WebAIM — [Keyboard Accessibility](https://webaim.org/techniques/keyboard/)
-- Spotify — inspiratie voor markeer-navigatie gedrag (terug naar vorige markering met threshold)
