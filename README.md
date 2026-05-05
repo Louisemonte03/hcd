@@ -215,12 +215,12 @@ De hele dag.
 
 - Screen reader gedrag fixen zodat hij niet door de UI heen praat
 - Markeringnavigatie fixen (zoals Spotify: altijd écht terug naar vorige)
-- Spatie omzetten naar `Alt+Spatie` zodat het in het tekstveld werkt
+- Spatie omzetten naar alt+spatie zodat het in het tekstveld werkt
 - Sneltoetsen overzicht opschonen en beter zichtbaar maken
 
 ## Weekreflectie — Week 4
 
-In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste verbeteringen: de screenreader leest niet meer door de hele interface heen (tabvolgorde opgeschoond, aria-live alleen op de statusbalk), de markeernavigatie werkt nu zoals Spotify — als je net voorbij een markering zit ga je terug naar de vorige, anders ga je terug naar die markering zelf. En `Alt+Spatie` werkt nu ook in het tekstveld. Tot slot is de shortcutlegenda naar boven verplaatst en heeft het prototype een grappig nonsense-element gekregen: Lilly reageert met willekeurige emoji-reacties als je een moment markeert.
+In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste verbeteringen: de screenreader leest niet meer door de hele interface heen (tabvolgorde opgeschoond, aria-live alleen op de statusbalk), de markeernavigatie werkt nu zoals Spotify — als je net voorbij een markering zit ga je terug naar de vorige, anders ga je terug naar die markering zelf. En Alt+spatie werkt nu ook in het tekstveld. Tot slot is de shortcutlegenda naar boven verplaatst en heeft het prototype een grappig nonsense-element gekregen: Lilly reageert met willekeurige emoji-reacties als je een moment markeert.
 
 Er zijn nog een paar fouten is dat de screan reader over de text gaat van de gebruiker als de gebruiker iets markeert of terug markeert. Hier moet ik nog even naar kijken.
 

@@ -23,15 +23,18 @@ function playTone(frequency = 440, duration = 0.15, type = "sine") {
   osc.frequency.value = frequency;
 
   gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audioCtx.currentTime + duration,
+  );
 
   osc.start();
   osc.stop(audioCtx.currentTime + duration);
 }
 
 const sounds = {
-  play:    () => playTone(523, 0.12),
-  pauze:   () => playTone(392, 0.18),
+  play: () => playTone(523, 0.12),
+  pauze: () => playTone(392, 0.18),
   verstuur: () => {
     playTone(659, 0.08);
     setTimeout(() => playTone(784, 0.1), 90);
@@ -145,7 +148,10 @@ function togglePlay() {
     audio.pause();
     playSound("pauze");
     const sec = Math.round(audio.currentTime);
-    setStatus("Gepauzeerd &nbsp;— <kbd>Alt</kbd>+<kbd>Spatie</kbd> verdergaan", "");
+    setStatus(
+      "Gepauzeerd &nbsp;— <kbd>Alt</kbd>+<kbd>Spatie</kbd> verdergaan",
+      "",
+    );
     speak("Gepauzeerd op " + sec + " seconden");
   }
 }
@@ -157,7 +163,10 @@ function skip(seconds) {
   );
   const richting = seconds > 0 ? "vooruit" : "terug";
   const pos = Math.round(audio.currentTime);
-  setStatus(Math.abs(seconds) + "s " + richting + " — positie: " + pos + "s", "");
+  setStatus(
+    Math.abs(seconds) + "s " + richting + " — positie: " + pos + "s",
+    "",
+  );
   speakAlsPaused(pos + " seconden");
 }
 
@@ -206,7 +215,10 @@ function goToPrevMarker() {
     if (t - nearest >= THRESHOLD) {
       target = nearest;
     } else {
-      target = before.length > 1 ? before[before.length - 2] : markers[markers.length - 1];
+      target =
+        before.length > 1
+          ? before[before.length - 2]
+          : markers[markers.length - 1];
     }
   }
   audio.currentTime = target;
@@ -222,7 +234,10 @@ function renderMarkers() {
     const btn = document.createElement("button");
     btn.className = "marker-badge";
     btn.textContent = "⚑ " + t + "s";
-    btn.setAttribute("aria-label", "Spring naar markering op " + t + " seconden");
+    btn.setAttribute(
+      "aria-label",
+      "Spring naar markering op " + t + " seconden",
+    );
     btn.addEventListener("click", () => {
       audio.currentTime = t;
       playSound("spring");
@@ -258,7 +273,6 @@ document.getElementById("progressBar").addEventListener("click", (e) => {
 });
 
 document.addEventListener("keydown", (e) => {
-
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
     if (e.altKey && e.code === "Space") {
       e.preventDefault();
