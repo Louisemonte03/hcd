@@ -1,15 +1,7 @@
-// Bronnen
-// Vasilis van Gemert — Exclusive Design: https://exclusive-design.vasilis.nl/ (2018)
-// MDN Web Docs — Web Audio API: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
-// MDN Web Docs — SpeechSynthesis: https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
-// MDN Web Docs — KeyboardEvent: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
-// MDN Web Docs — ARIA role="slider": https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role
-// W3C — WAI-ARIA Authoring Practices: https://www.w3.org/WAI/ARIA/apg/
-// WebAIM — Keyboard Accessibility: https://webaim.org/techniques/keyboard/
-
 const audio = document.getElementById("audio");
 let markers = [];
 
+// Web Audio API — MDN: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 function playTone(frequency = 440, duration = 0.15, type = "sine") {
@@ -58,6 +50,7 @@ function playSound(naam) {
   if (sounds[naam]) sounds[naam]();
 }
 
+// SpeechSynthesis — MDN: https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
 function speak(tekst) {
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(tekst);
@@ -70,6 +63,9 @@ function speakAlsPaused(tekst) {
   if (audio.paused) speak(tekst);
 }
 
+// ARIA role="slider" — MDN: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role
+// WAI-ARIA Authoring Practices — W3C: https://www.w3.org/WAI/ARIA/apg/
+// Exclusive Design (Vasilis van Gemert, 2018): https://exclusive-design.vasilis.nl/
 audio.addEventListener("loadedmetadata", () => {
   updateDuration();
   document
@@ -272,6 +268,8 @@ document.getElementById("progressBar").addEventListener("click", (e) => {
   audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
 });
 
+// KeyboardEvent — MDN: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+// Keyboard Accessibility — WebAIM: https://webaim.org/techniques/keyboard/
 document.addEventListener("keydown", (e) => {
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
     if (e.altKey && e.code === "Space") {
