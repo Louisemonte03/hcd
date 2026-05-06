@@ -5,10 +5,8 @@
 ### Dag 1 — maandag 30 maart
 
 **Wat heb ik gedaan?**
-Vandaag kregen we de aftrap van het vak Human Centered Design. We kregen een introductie over accessibility en hoe mensen met een beperking het web gebruiken — met name mensen die schermleessoftware of andere hulptechnologieën gebruiken. De kern van de boodschap: het web is voor iedereen. Dat betekent dat we dingen kunnen maken die iedereen kan gebruiken. Maar kennen we iedereen wel?
 
-In dit vak gaan we dat leren. Er zijn drie mensen uitgenodigd die elke week langskomen. We gaan voor één van deze mensen een prototype ontwerpen — heel specifiek, alleen voor die ene persoon. Deze mensen gebruiken het web op hun eigen manier, en het is onze taak om ervoor te zorgen dat ons prototype optimaal aansluit op hun voorkeuren en behoeften.
-
+Vandaag kregen we de aftrap van het vak human centered design. We kregen een introductie over accessibility en hoe mensen nou eigenlijk met een beperking het werb gebruiken. Met name name mensen die screan reader gebruiken of andere technologien.
 We werken met de **Exclusive Design Principles**:
 
 - **Study situation** — bestudeer goed hoe jouw testpersoon het web en hun computer gebruikt
@@ -16,10 +14,10 @@ We werken met de **Exclusive Design Principles**:
 - **Prioritise identity** — zorg dat de identiteit van jouw testpersoon zichtbaar is in het prototype
 - **Add nonsense** — denk outside the box, ontwerp dingen die we nog niet kennen
 
-Mijn testpersoon is **Ihab**. Na de introductie ben ik nagedacht over een eerste idee voor hem.
+Mijn testpersoon is Ihab. Na de introductie ben ik nagedacht over een eerste idee voor hem.
 
 **Idee: Mood Intro**
-Wanneer Ihab een pagina laadt, speelt er een kort intro geluid (2 of 3 seconden) dat direct de sfeer en het type pagina aangeeft. Daarna speelt er een zacht achtergrondgeluid dat blijft lopen terwijl hij de pagina gebruikt. Zo weet hij meteen — zonder te lezen of navigeren — wat voor soort pagina hij heeft geopend.
+Wanneer Ihab een pagina laadt, speelt er een kort intro geluid (2 of 3 seconden) dat direct de sfeer en het type pagina aangeeft. Daarna speelt er een zacht achtergrondgeluid dat blijft lopen terwijl hij de pagina gebruikt. Zo weet hij meteen, zonder te lezen of navigeren, wat voor soort pagina hij heeft geopend.
 
 Voorbeelden van sfeergeluiden per paginatype:
 
@@ -35,10 +33,10 @@ Voorbeelden van sfeergeluiden per paginatype:
 - Bank / finance
 
 **Hoe lang duurde het?**
-De hele dag — introductie in de ochtend, daarna nagedacht over het concept en het idee uitgewerkt.
+De hele dag, introductie in de ochtend, daarna nagedacht over het concept en het idee uitgewerkt.
 
 **Wat heb ik geleerd?**
-Dat inclusive design en exclusive design twee verschillende benaderingen zijn. Bij exclusive design ontwerp je niet voor iedereen tegelijk, maar juist heel specifiek voor één persoon. Dat vraagt om écht luisteren en observeren in plaats van aannames doen.
+Dat inclusive design en exclusive design twee verschillende benaderingen zijn. Bij exclusive design ontwerp je niet voor iedereen tegelijk, maar juist heel specifiek voor een persoon.
 
 **Wat ga ik morgen doen?**
 Voor dinsdag neem ik een aantal vragen mee voor Ihab zodat ik mijn idee beter kan uitwerken en aansluiten op hoe hij het web daadwerkelijk gebruikt. Ik wil weten hoe hij nu pagina's ervaart, wat hij fijn of frustrerend vindt, en of een audio gebaseerde aanpak iets voor hem zou zijn.
@@ -46,7 +44,7 @@ Voor dinsdag neem ik een aantal vragen mee voor Ihab zodat ik mijn idee beter ka
 ### Dag 2 — dinsdag 31 maart
 
 **Wat heb ik gedaan?**
-Als eerste hebben we een test sessie gehad met Ihab. Ik heb goed geluisterd naar zijn ervaringen en frustraties met screenreaders en spraakberichten. Daarna heb ik mijn notities uitgewerkt en nagedacht over het concept. Het idee is ontstaan om de standaard screenreader te vervangen door een AI-stem die emotie kan overbrengen.
+Als eerste hebben we een test sessie gehad met Ihab. Ik heb goed geluisterd naar zijn ervaringen en frustraties met screenreaders en spraakberichten. Daarna heb ik mijn notities uitgewerkt en nagedacht over het concept. Het idee is ontstaan om de standaard screenreader te vervangen door een ai stem die emotie kan overbrengen.
 
 #### Observaties
 
@@ -112,14 +110,18 @@ Volgende week ga ik het verder en groter uitwerken. Weet niet of ik de geluidjes
 
 ## Weekreflectie — Week 2
 
-In week 2 ben ik erachter gekomen dat het Mood Intro idee te vaag was voor Ihab — hij wilde iets concreets waarmee hij echt zijn spraakmemo's beter kan gebruiken. Hewhatsapp interface idee voelt veel beter: het sluit aan op zijn dagelijks gebruik. Ik heb besloten om de focus te leggen op een keyboard voicebericht speler waarbij je met sneltoetsen kunt navigeren, markeren en reageren.
+In week 2 ben ik erachter gekomen dat het mood afspeler idee te vaag was voor Ihab, hij wilde iets concreets waarmee hij echt zijn spraakmemo's beter kan gebruiken. Hewhatsapp interface idee voelt veel beter, wat hij ook in het dagelijks leven gebruikt. Ik heb besloten om de focus te leggen op een keyboard voicebericht speler waarbij je met sneltoetsen kunt navigeren, markeren en reageren.
 
 ## week 3
 
 ### Dag 5 — Maandag 13 april
 
 **Wat heb ik gedaan?**
-Keyboard interface uitgewerkt voor de voice memo prototype van Ihab. Ik heb een nieuw snelkoppelingensysteem bedacht en gebouwd met de volgende functies: Space voor play/pause, pijltjes voor 5 seconden voor/achteruit, alt + m om een moment te markeren als badge, alt + G om naar een markering te springen, T voor een ai transcriptie van 10 woorden rondom het huidige punt, R om een tekstreactie te starten (pauzeert automatisch en opent spraakherkenning indien beschikbaar) en enter om de reactie te versturen als whatsa app bubbel.
+de keyboard interface uitgewerkt voor de voice memo prototype van Ihab. Ik heb een nieuw systeem bedacht en gebouwd met de volgende functies:
+Space voor play/pause
+pijltjes voor 5 seconden voor/achteruit
+alt + m om een moment te markeren als badge
+alt + G om naar een markering te springen
 
 ![Shortcut overzicht / keyboard diagram](images/assets/sneltoetsen.png)
 
@@ -135,7 +137,7 @@ De interface testen met Ihab en kijken waar hij vastloopt.
 ### Dag 6 — Dinsdag 14 april
 
 **Wat heb ik gedaan?**
-Gebruikerstest gedaan met Ihab. Hieruit kwamen een aantal duidelijke bevindingen: stoppen en pauzeren moeten dezelfde knop zijn (nu beide Space), de screenreader liep steeds over de interface heen waardoor de focus management aangepast moet worden, snelkoppelingen werkten niet als de focus in een tekstveld zat, de afspeelsnelheid was te hoog voor Ihab (pijltjes omhoog/omlaag toegevoegd voor snelheidsregeling) en de markeerfunctie miste audio feedback en navigatie. Op basis van de test heb ik de shortcutlijst bijgewerkt en een to do opgesteld voor de vervolgstap.
+Gebruikerstest gedaan met Ihab. Hieruit kwamen een aantal duidelijke bevindingen: stoppen en pauzeren moeten dezelfde knop zijn, de screenreader liep steeds over de interface heen waardoor de focus aangepast moest worden, snelkoppelingen werkten niet als de focus in een tekstveld zat, de afspeelsnelheid was te hoog voor Ihab en de markeerfunctie miste audio feedback en navigatie. Op basis van de test heb ik de shortcutlijst bijgewerkt en een to do opgesteld voor de vervolgstap.
 
 ![Foto/screenshot testsessie met Ihab week 3](images/assets/voorbeeld-test-documentatie.png)
 
@@ -143,7 +145,7 @@ Gebruikerstest gedaan met Ihab. Hieruit kwamen een aantal duidelijke bevindingen
 Hele dag mee bezig geweest.
 
 **Wat heb ik geleerd?**
-Dat snelkoppelingen die logisch lijken voor een ziende gebruiker anders uitpakken voor iemand die een screenreader gebruikt. Focus management is cruciaal als de screenreader de interface overneemt, verliest de gebruiker de context van wat er speelt. Ook bleek dat het onderscheid tussen stoppen en pauzeren voor Ihab niet relevant is; een knop werkt beter.
+Dat snelkoppelingen die logisch lijken voor een ziende gebruiker anders uitpakken voor iemand die een screenreader gebruikt. Focus management is cruciaal als de screenreader de interface overneemt, verliest de gebruiker de context van wat er speelt.
 
 **Wat ga ik volgende week doen?**
 Prototype verder uitwerken, readme schrijven met inzichten, audio sounds toevoegen bij markering en navigatie, en focus management fixen zodat de screenreader niet over de controls heen loopt.
@@ -171,9 +173,7 @@ De hele dag.
 
 **Wat heb ik geleerd?**
 
-- Hoe de web audio api werkt met een oscillator en gain node om tonen te genereren
-- Hoe je speechsynthesis combineert met ui acties voor toegankelijke feedback
-- Hoe je keyboard events afhandelt zonder dat ze botsen met invoervelden
+Hoe de web audio afspeeld, hoe je speach synthesis kan combineren en hoe je keyboard events afhandeld zonder dat ze botsen met invoervelden.
 
 **Wat ga ik morgen doen?**
 
@@ -199,21 +199,15 @@ Getest met Ihab. De volgende problemen zijn naar voren gekomen:
 De hele dag.
 
 **Wat heb ik geleerd?**
+Focussen op de snel toesten en op de screen reader. Ben er nog niet uit gekomen met de screan reader. Die moet ik nog fixen
 
-- Testen met een echte gebruiker laat snel zien waar de prioriteiten liggen
-- Focus en sneltoetsbeheer is moeilijker zodra een screen reader erbij komt
-- Kleine navigatiebugs zoals de markering vallen pas op in echte gebruik
+**Wat ga ik volgende week doen?**
 
-**Wat ga ik morgen doen?**
-
-- Screen reader gedrag fixen zodat hij niet door de UI heen praat
-- Markeringnavigatie fixen (zoals Spotify: altijd echt terug naar vorige)
-- Spatie omzetten naar alt+spatie zodat het in het tekstveld werkt
-- Sneltoetsen overzicht opschonen en beter zichtbaar maken
+Screen reader gedrag fixen zodat hij niet door de UI heen praat. Spatie omzetten naar alt+spatie zodat het in het tekstveld werkt.Sneltoetsen overzicht opschonen en beter zichtbaar maken. Kleine navigatiebugs zoals de markering vallen pas op in echte gebruik.
 
 ## Weekreflectie — Week 4
 
-In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste verbeteringen: de screenreader leest niet meer door de hele interface heen (tabvolgorde opgeschoond, aria live alleen op de statusbalk), de markeernavigatie werkt nu zoals Spotify als je net voorbij een markering zit ga je terug naar de vorige, anders ga je terug naar die markering zelf. En alt + spatie werkt nu ook in het tekstveld. Tot slot is de shortcutlegenda naar boven verplaatst.
+In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste verbeteringen: de screenreader leest niet meer door de hele interface heen, de markeernavigatie werkt nu. Tot slot is de shortcutlegenda naar boven verplaatst.
 
 Er zijn nog een paar fouten is dat de screan reader over de text gaat van de gebruiker als de gebruiker iets markeert of terug markeert. Hier moet ik nog even naar kijken.
 
