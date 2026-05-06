@@ -60,15 +60,15 @@ Als eerste hebben we een test sessie gehad met Ihab. Ik heb goed geluisterd naar
 
 **Wat is het probleem?**
 
-- Lange spraakberichten (soms 4 minuten) luistert hij pas later — hij stelt het uit omdat het zoveel tijd kost
+- Lange spraakberichten (soms 4 minuten) luistert hij pas later hij stelt het uit omdat het zoveel tijd kost
 - Screenreaders hebben geen emotie, ze klinken saai en neutraal
 - Irritaties komen vaak door elementen die niet goed gelabeld zijn
 
 **Oplossingsrichtingen vanuit Ihab:**
 
 - Een sneltoets waarmee hij kan pauzeren zodat hij de tijd heeft om te reageren
-- AI-stemmen zijn menselijker en hebben meer emotie
-- Het belangrijkste is tekst en spraak — het draait altijd om text-to-speech
+- ai stemmen zijn menselijker en hebben meer emotie
+- Het belangrijkste is tekst en spraak — het draait altijd om text to speech
 - Screenreaders zijn saai en dat wil hij anders
 
 **Hoe lang duurde het?**
@@ -119,7 +119,7 @@ In week 2 ben ik erachter gekomen dat het Mood Intro idee te vaag was voor Ihab 
 ### Dag 5 — Maandag 13 april
 
 **Wat heb ik gedaan?**
-Keyboard interface uitgewerkt voor de voice memo prototype van Ihab. Ik heb een nieuw snelkoppelingensysteem bedacht en gebouwd met de volgende functies: Space voor play/pause, pijltjes voor 5 seconden voor/achteruit, Alt+M om een moment te markeren als badge, Alt+G om naar een markering te springen, T voor een ai transcriptie van ~10 woorden rondom het huidige punt, R om een tekstreactie te starten (pauzeert automatisch en opent spraakherkenning indien beschikbaar) en Enter om de reactie te versturen als Whats app bubbel.
+Keyboard interface uitgewerkt voor de voice memo prototype van Ihab. Ik heb een nieuw snelkoppelingensysteem bedacht en gebouwd met de volgende functies: Space voor play/pause, pijltjes voor 5 seconden voor/achteruit, alt + m om een moment te markeren als badge, alt + G om naar een markering te springen, T voor een ai transcriptie van 10 woorden rondom het huidige punt, R om een tekstreactie te starten (pauzeert automatisch en opent spraakherkenning indien beschikbaar) en enter om de reactie te versturen als whatsa app bubbel.
 
 ![Shortcut overzicht / keyboard diagram](images/assets/sneltoetsen.png)
 
@@ -143,14 +143,14 @@ Gebruikerstest gedaan met Ihab. Hieruit kwamen een aantal duidelijke bevindingen
 Hele dag mee bezig geweest.
 
 **Wat heb ik geleerd?**
-Dat snelkoppelingen die logisch lijken voor een ziende gebruiker anders uitpakken voor iemand die een screenreader gebruikt. Focus management is cruciaal — als de screenreader de interface overneemt, verliest de gebruiker de context van wat er speelt. Ook bleek dat het onderscheid tussen "stoppen" en "pauzeren" voor Ihab niet relevant is; één knop werkt beter.
+Dat snelkoppelingen die logisch lijken voor een ziende gebruiker anders uitpakken voor iemand die een screenreader gebruikt. Focus management is cruciaal als de screenreader de interface overneemt, verliest de gebruiker de context van wat er speelt. Ook bleek dat het onderscheid tussen stoppen en pauzeren voor Ihab niet relevant is; een knop werkt beter.
 
 **Wat ga ik volgende week doen?**
-Prototype verder uitwerken, README schrijven met inzichten, audio sounds toevoegen bij markering en navigatie, en focus management fixen zodat de screenreader niet over de controls heen loopt.
+Prototype verder uitwerken, readme schrijven met inzichten, audio sounds toevoegen bij markering en navigatie, en focus management fixen zodat de screenreader niet over de controls heen loopt.
 
 ## Weekreflectie — Week 3
 
-Week 3 was de week dat het prototype echt vorm begon te krijgen. De testsessie met Ihab was heel waardevol — ik merkte dat ik veel aannames had gemaakt over hoe hij zou navigeren. Het grootste inzicht was dat focus management alles bepaalt: als de screenreader focus heeft op een element dat ik niet verwacht, valt de hele sneltoetsstructuur weg. Ik ga volgende week de screenreader-laag echt goed aanpakken.
+Week 3 was de week dat het prototype echt vorm begon te krijgen. De testsessie met Ihab was heel waardevol ik merkte dat ik veel aannames had gemaakt over hoe hij zou navigeren. Het grootste inzicht was dat focus management alles bepaalt: als de screenreader focus heeft op een element dat ik niet verwacht, valt de hele sneltoetsstructuur weg. Ik ga volgende week de screenreader laag echt goed aanpakken.
 
 ## week 4
 
@@ -158,12 +158,12 @@ Week 3 was de week dat het prototype echt vorm begon te krijgen. De testsessie m
 
 **Wat heb ik gedaan?**
 
-Audio-ondersteuning toegevoegd via de Web Audio API. Concreet:
+Audio ondersteuning toegevoegd via de web audio API. Concreet:
 
 - Geluidseffecten bij afspelen, pauzeren, versturen en springen naar markeringen
 - Snelheid aanpassen met pijltjes omhoog/omlaag
 - Escape verlaat het tekstveld en geeft spraakfeedback
-- Spraak via SpeechSynthesis bij versturen en terugkeren naar markering
+- Spraak via speechsynthesis bij versturen en terugkeren naar markering
 
 **Hoe lang duurde het?**
 
@@ -171,8 +171,8 @@ De hele dag.
 
 **Wat heb ik geleerd?**
 
-- Hoe de Web Audio API werkt met een oscillator en gain node om tonen te genereren
-- Hoe je SpeechSynthesis combineert met UI-acties voor toegankelijke feedback
+- Hoe de web audio api werkt met een oscillator en gain node om tonen te genereren
+- Hoe je speechsynthesis combineert met ui acties voor toegankelijke feedback
 - Hoe je keyboard events afhandelt zonder dat ze botsen met invoervelden
 
 **Wat ga ik morgen doen?**
@@ -187,34 +187,33 @@ Getest met Ihab. De volgende problemen zijn naar voren gekomen:
 
 - Screen reader praat te veel door de UI heen
 - Sneltoetsen worden niet goed gehighlight bovenaan de pagina
-- Alt+m is overbodig — M markeert al
-- Bug: teruggaan naar vorige markering springt naar het huidige moment in plaats van de vorige (bijv. zit op 18s, wil naar 6s, springt naar 12s)
+- alt m is overbodig m markeert al
+- Bug die ik had: teruggaan naar vorige markering springt naar het huidige moment in plaats van de vorige (bijv. zit op 18s, wil naar 6s, springt naar 12s)
 - Sneltoetsen werken niet in het tekstveld
-- Spatie moet Alt+Spatie worden zodat het ook in het tekstveld werkt
-- Focus zat niet goed bij het spraakbericht — sprong naar markering in plaats van tekstveld
+- Spatie moet alt + spatie worden zodat het ook in het tekstveld werkt
+- Focus zat niet goed bij het spraakbericht sprong naar markering in plaats van tekstveld
 
 ![Screenshot eindprototype in de browser](images/assets/eindproduct.png)
 
 **Hoe lang duurde het?**
-
 De hele dag.
 
 **Wat heb ik geleerd?**
 
 - Testen met een echte gebruiker laat snel zien waar de prioriteiten liggen
-- Focus- en sneltoetsbeheer is complexer zodra een screen reader erbij komt
-- Kleine navigatiebugs (zoals de markering) vallen pas op in echte gebruik
+- Focus en sneltoetsbeheer is moeilijker zodra een screen reader erbij komt
+- Kleine navigatiebugs zoals de markering vallen pas op in echte gebruik
 
 **Wat ga ik morgen doen?**
 
 - Screen reader gedrag fixen zodat hij niet door de UI heen praat
-- Markeringnavigatie fixen (zoals Spotify: altijd écht terug naar vorige)
+- Markeringnavigatie fixen (zoals Spotify: altijd echt terug naar vorige)
 - Spatie omzetten naar alt+spatie zodat het in het tekstveld werkt
 - Sneltoetsen overzicht opschonen en beter zichtbaar maken
 
 ## Weekreflectie — Week 4
 
-In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste verbeteringen: de screenreader leest niet meer door de hele interface heen (tabvolgorde opgeschoond, aria live alleen op de statusbalk), de markeernavigatie werkt nu zoals Spotify — als je net voorbij een markering zit ga je terug naar de vorige, anders ga je terug naar die markering zelf. En Alt+spatie werkt nu ook in het tekstveld. Tot slot is de shortcutlegenda naar boven verplaatst en heeft het prototype een grappig nonsense element gekregen: Lilly reageert met willekeurige emoji reacties als je een moment markeert.
+In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste verbeteringen: de screenreader leest niet meer door de hele interface heen (tabvolgorde opgeschoond, aria live alleen op de statusbalk), de markeernavigatie werkt nu zoals Spotify als je net voorbij een markering zit ga je terug naar de vorige, anders ga je terug naar die markering zelf. En alt + spatie werkt nu ook in het tekstveld. Tot slot is de shortcutlegenda naar boven verplaatst.
 
 Er zijn nog een paar fouten is dat de screan reader over de text gaat van de gebruiker als de gebruiker iets markeert of terug markeert. Hier moet ik nog even naar kijken.
 
