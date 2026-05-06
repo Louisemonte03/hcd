@@ -14,6 +14,8 @@ We werken met de **Exclusive Design Principles**:
 - **Prioritise identity** — zorg dat de identiteit van jouw testpersoon zichtbaar is in het prototype
 - **Add nonsense** — denk outside the box, ontwerp dingen die we nog niet kennen
 
+> Bron: Vasilis van Gemert — [Exclusive Design](https://exclusive-design.vasilis.nl/) (2018)
+
 Mijn testpersoon is Ihab. Na de introductie ben ik nagedacht over een eerste idee voor hem.
 
 **Idee: Mood Intro**
@@ -125,6 +127,8 @@ alt + G om naar een markering te springen
 
 ![Shortcut overzicht / keyboard diagram](images/assets/sneltoetsen.png)
 
+> Bronnen: MDN — [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) · WebAIM — [Keyboard Accessibility](https://webaim.org/techniques/keyboard/)
+
 **Hoe lang duurde het?**
 Hele dag mee bezig geweest.
 
@@ -147,6 +151,8 @@ Hele dag mee bezig geweest.
 **Wat heb ik geleerd?**
 Dat snelkoppelingen die logisch lijken voor een ziende gebruiker anders uitpakken voor iemand die een screenreader gebruikt. Focus management is cruciaal als de screenreader de interface overneemt, verliest de gebruiker de context van wat er speelt.
 
+> Bronnen: MDN — [ARIA: role="slider"](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role) · W3C — [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/) · MDN — [:focus-visible](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible)
+
 **Wat ga ik volgende week doen?**
 Prototype verder uitwerken, readme schrijven met inzichten, audio sounds toevoegen bij markering en navigatie, en focus management fixen zodat de screenreader niet over de controls heen loopt.
 
@@ -166,6 +172,8 @@ Audio ondersteuning toegevoegd via de web audio API. Concreet:
 - Snelheid aanpassen met pijltjes omhoog/omlaag
 - Escape verlaat het tekstveld en geeft spraakfeedback
 - Spraak via speechsynthesis bij versturen en terugkeren naar markering
+
+> Bronnen: MDN — [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) · MDN — [SpeechSynthesis](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis) · MDN — [HTMLMediaElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) · MDN — [ARIA live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions)
 
 **Hoe lang duurde het?**
 
@@ -210,13 +218,3 @@ Screen reader gedrag fixen zodat hij niet door de UI heen praat. Spatie omzetten
 In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste verbeteringen: de screenreader leest niet meer door de hele interface heen, de markeernavigatie werkt nu. Tot slot is de shortcutlegenda naar boven verplaatst.
 
 Er zijn nog een paar fouten is dat de screan reader over de text gaat van de gebruiker als de gebruiker iets markeert of terug markeert. Hier moet ik nog even naar kijken.
-
-## Bronnen
-
-- Vasilis van Gemert — [Exclusive Design](https://exclusive-design.vasilis.nl/) (2018)
-- MDN Web Docs — [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
-- MDN Web Docs — [SpeechSynthesis](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis)
-- MDN Web Docs — [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent)
-- MDN Web Docs — [ARIA: role="slider"](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role)
-- W3C — [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
-- WebAIM — [Keyboard Accessibility](https://webaim.org/techniques/keyboard/)

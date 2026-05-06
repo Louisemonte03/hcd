@@ -176,6 +176,7 @@ body {
   background: #0a7a6a;
 }
 
+/* :focus-visible — MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
 .play-btn:focus-visible {
   outline: 2px solid #25d366;
   outline-offset: 2px;

@@ -63,9 +63,6 @@ function speakAlsPaused(tekst) {
   if (audio.paused) speak(tekst);
 }
 
-// ARIA role="slider" — MDN: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role
-// WAI-ARIA Authoring Practices — W3C: https://www.w3.org/WAI/ARIA/apg/
-// Exclusive Design (Vasilis van Gemert, 2018): https://exclusive-design.vasilis.nl/
 audio.addEventListener("loadedmetadata", () => {
   updateDuration();
   document
@@ -98,6 +95,8 @@ function updateDuration() {
     "0:" + String(remaining).padStart(2, "0");
 }
 
+// ARIA role="slider" — MDN: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role
+// WAI-ARIA Authoring Practices — W3C: https://www.w3.org/WAI/ARIA/apg/
 function updateProgress() {
   const progress = audio.duration ? audio.currentTime / audio.duration : 0;
   document.getElementById("progressFill").style.width = progress * 100 + "%";
@@ -117,6 +116,7 @@ function updateWaveform(progress) {
   });
 }
 
+// ARIA live regions — MDN: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
 function setStatus(msg, type) {
   const el = document.getElementById("statusBar");
   el.innerHTML = msg;
@@ -133,6 +133,7 @@ audio.addEventListener("ended", () => {
   speak("Bericht afgespeeld");
 });
 
+// HTMLMediaElement — MDN: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
 function togglePlay() {
   if (audioCtx.state === "suspended") audioCtx.resume();
 
