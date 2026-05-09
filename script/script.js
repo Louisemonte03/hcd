@@ -1,25 +1,22 @@
 const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
 let markers = [];
 
-// Web Audio API — MDN: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
+// Web Audio API tonen als feedback
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 function playTone(frequency = 440, duration = 0.15, type = "sine") {
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
-
   osc.connect(gain);
   gain.connect(audioCtx.destination);
-
   osc.type = type;
   osc.frequency.value = frequency;
-
   gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
   gain.gain.exponentialRampToValueAtTime(
     0.001,
     audioCtx.currentTime + duration,
   );
-
   osc.start();
   osc.stop(audioCtx.currentTime + duration);
 }
@@ -27,10 +24,6 @@ function playTone(frequency = 440, duration = 0.15, type = "sine") {
 const sounds = {
   play: () => playTone(523, 0.12),
   pauze: () => playTone(392, 0.18),
-  verstuur: () => {
-    playTone(659, 0.08);
-    setTimeout(() => playTone(784, 0.1), 90);
-  },
   markeer: () => {
     playTone(880, 0.08);
     setTimeout(() => playTone(1047, 0.12), 80);
@@ -39,6 +32,10 @@ const sounds = {
     playTone(784, 0.08);
     setTimeout(() => playTone(880, 0.1), 80);
   },
+  verstuur: () => {
+    playTone(659, 0.08);
+    setTimeout(() => playTone(784, 0.1), 90);
+  },
   einde: () => {
     playTone(523, 0.1);
     setTimeout(() => playTone(659, 0.1), 110);
@@ -46,65 +43,46 @@ const sounds = {
   },
 };
 
-function playSound(naam) {
-  if (sounds[naam]) sounds[naam]();
-}
-
-// SpeechSynthesis — MDN: https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
-function speak(tekst) {
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(tekst);
-  u.lang = "nl-NL";
-  u.rate = 1.1;
-  speechSynthesis.speak(u);
-}
-
-function speakAlsPaused(tekst) {
-  if (audio.paused) speak(tekst);
-}
-
+// UI updaten
 audio.addEventListener("loadedmetadata", () => {
-  updateDuration();
-  document
-    .getElementById("progressBar")
-    .setAttribute("aria-valuemax", Math.round(audio.duration));
+  document.getElementById("durationLabel").textContent =
+    "0:" + String(Math.round(audio.duration)).padStart(2, "0");
 });
 
-const waveformEl = document.getElementById("waveform");
-for (let i = 0; i < 28; i++) {
-  const h = 6 + Math.round(Math.random() * 16);
-  const bar = document.createElement("div");
-  bar.className = "bar";
-  bar.style.height = h + "px";
-  waveformEl.appendChild(bar);
-}
-
-function updateUI() {
-  const btn = document.getElementById("playBtn");
-  const playing = !audio.paused;
-  btn.textContent = playing ? "⏸" : "▶";
-  btn.setAttribute("aria-pressed", playing ? "true" : "false");
-  btn.setAttribute("aria-label", playing ? "Pauzeren" : "Afspelen");
-}
-
-function updateDuration() {
-  const remaining = audio.duration
-    ? Math.round(audio.duration - audio.currentTime)
-    : 0;
-  document.getElementById("durationLabel").textContent =
-    "0:" + String(remaining).padStart(2, "0");
-}
-
-// ARIA role="slider" — MDN: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role
-// WAI-ARIA Authoring Practices — W3C: https://www.w3.org/WAI/ARIA/apg/
-function updateProgress() {
+audio.addEventListener("timeupdate", () => {
   const progress = audio.duration ? audio.currentTime / audio.duration : 0;
   document.getElementById("progressFill").style.width = progress * 100 + "%";
-  document
-    .getElementById("progressBar")
-    .setAttribute("aria-valuenow", Math.round(audio.currentTime));
-  updateDuration();
+  document.getElementById("durationLabel").textContent =
+    "0:" +
+    String(
+      Math.max(0, Math.round(audio.duration - audio.currentTime)),
+    ).padStart(2, "0");
   updateWaveform(progress);
+});
+
+audio.addEventListener("play", () => {
+  playBtn.textContent = "⏸";
+  playBtn.setAttribute("aria-label", "Pauzeren");
+});
+
+audio.addEventListener("pause", () => {
+  playBtn.textContent = "▶";
+  playBtn.setAttribute("aria-label", "Afspelen");
+});
+
+audio.addEventListener("ended", () => {
+  playBtn.textContent = "▶";
+  playBtn.setAttribute("aria-label", "Afspelen");
+  sounds.einde();
+});
+
+// Waveform
+const waveformEl = document.getElementById("waveform");
+for (let i = 0; i < 28; i++) {
+  const bar = document.createElement("div");
+  bar.className = "bar";
+  bar.style.height = 6 + Math.round(Math.random() * 16) + "px";
+  waveformEl.appendChild(bar);
 }
 
 function updateWaveform(progress) {
@@ -116,57 +94,34 @@ function updateWaveform(progress) {
   });
 }
 
-// ARIA live regions — MDN: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
-function setStatus(msg, type) {
-  const el = document.getElementById("statusBar");
-  el.innerHTML = msg;
-  el.className = "status-bar" + (type ? " " + type : "");
-}
-
-audio.addEventListener("timeupdate", updateProgress);
-audio.addEventListener("play", updateUI);
-audio.addEventListener("pause", updateUI);
-audio.addEventListener("ended", () => {
-  updateUI();
-  playSound("einde");
-  setStatus("Bericht afgespeeld", "");
-  speak("Bericht afgespeeld");
-});
-
-// HTMLMediaElement — MDN: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
+// Play / pause
 function togglePlay() {
   if (audioCtx.state === "suspended") audioCtx.resume();
-
   if (audio.paused) {
     audio.play();
-    playSound("play");
-    setStatus("Bezig met luisteren...", "listening");
+    sounds.play();
   } else {
     audio.pause();
-    playSound("pauze");
-    const sec = Math.round(audio.currentTime);
-    setStatus(
-      "Gepauzeerd &nbsp;— <kbd>Alt</kbd>+<kbd>Spatie</kbd> verdergaan",
-      "",
-    );
-    speak("Gepauzeerd op " + sec + " seconden");
+    sounds.pauze();
   }
 }
 
+playBtn.addEventListener("click", togglePlay);
+
+// Spoelen
 function skip(seconds) {
   audio.currentTime = Math.max(
     0,
     Math.min(audio.duration, audio.currentTime + seconds),
   );
-  const richting = seconds > 0 ? "vooruit" : "terug";
-  const pos = Math.round(audio.currentTime);
-  setStatus(
-    Math.abs(seconds) + "s " + richting + " — positie: " + pos + "s",
-    "",
-  );
-  speakAlsPaused(pos + " seconden");
+  sounds.spring();
 }
 
+// Snelheid
+const speeds = [1, 1.5, 2, 0.75];
+let speedIndex = 0;
+
+// Markeringen
 function markMoment() {
   if (audioCtx.state === "suspended") audioCtx.resume();
   const t = Math.round(audio.currentTime);
@@ -174,132 +129,99 @@ function markMoment() {
     markers.push(t);
     markers.sort((a, b) => a - b);
   }
-  playSound("markeer");
-  setStatus("Moment gemarkeerd op " + t + "s", "marked");
-  speakAlsPaused("Markering op " + t + " seconden");
+  sounds.markeer();
   renderMarkers();
-}
-
-function goToNextMarker() {
-  if (markers.length === 0) {
-    setStatus("Geen markeringen", "");
-    speak("Geen markeringen");
-    return;
-  }
-  const t = Math.round(audio.currentTime);
-  const next = markers.find((m) => m > t) ?? markers[0];
-  audio.currentTime = next;
-  playSound("spring");
-  setStatus("Naar markering " + next + "s gesprongen", "");
-  speakAlsPaused(next + " seconden");
-}
-
-function goToPrevMarker() {
-  if (markers.length === 0) {
-    setStatus("Geen markeringen", "");
-    speak("Geen markeringen");
-    return;
-  }
-  const t = audio.currentTime;
-  const THRESHOLD = 3;
-  const before = markers.filter((m) => m < t);
-
-  let target;
-  if (before.length === 0) {
-    target = markers[markers.length - 1];
-  } else {
-    const nearest = before[before.length - 1];
-    if (t - nearest >= THRESHOLD) {
-      target = nearest;
-    } else {
-      target =
-        before.length > 1
-          ? before[before.length - 2]
-          : markers[markers.length - 1];
-    }
-  }
-  audio.currentTime = target;
-  playSound("spring");
-  setStatus("Naar markering " + target + "s gesprongen", "");
-  speakAlsPaused(target + " seconden");
 }
 
 function renderMarkers() {
   const row = document.getElementById("markersRow");
   row.innerHTML = "";
   markers.forEach((t) => {
+    const li = document.createElement("li");
     const btn = document.createElement("button");
     btn.className = "marker-badge";
-    btn.textContent = "⚑ " + t + "s";
+    btn.textContent = t + "s";
     btn.setAttribute(
       "aria-label",
       "Spring naar markering op " + t + " seconden",
     );
     btn.addEventListener("click", () => {
       audio.currentTime = t;
-      playSound("spring");
-      setStatus("Naar markering " + t + "s gesprongen", "");
-      speak(t + " seconden");
+      sounds.spring();
     });
-    row.appendChild(btn);
+    li.appendChild(btn);
+    row.appendChild(li);
   });
 }
 
+function goToNextMarker() {
+  if (!markers.length) return;
+  const t = Math.round(audio.currentTime);
+  audio.currentTime = markers.find((m) => m > t) ?? markers[0];
+  sounds.spring();
+}
+
+function goToPrevMarker() {
+  if (!markers.length) return;
+  const t = audio.currentTime;
+  const before = markers.filter((m) => m < t - 2);
+  audio.currentTime = before.length
+    ? before[before.length - 1]
+    : markers[markers.length - 1];
+  sounds.spring();
+}
+
+// Reageren
 function sendReply() {
   const input = document.getElementById("replyInput");
   const tekst = input.value.trim();
   if (!tekst) return;
-
   document.getElementById("replyBubble").textContent = tekst;
   document.getElementById("replyWrap").style.display = "flex";
-
   const now = new Date();
   document.getElementById("replyTime").textContent =
     now.getHours() + ":" + String(now.getMinutes()).padStart(2, "0");
-
   input.value = "";
-  playSound("verstuur");
-  setStatus("Reactie verstuurd ✓", "");
-  speak("Reactie verstuurd");
+  sounds.verstuur();
 }
 
+// Voortgangsbalk klikken
 document.getElementById("progressBar").addEventListener("click", (e) => {
   if (!audio.duration) return;
   const rect = e.currentTarget.getBoundingClientRect();
   audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
 });
 
-// KeyboardEvent — MDN: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
-// Keyboard Accessibility — WebAIM: https://webaim.org/techniques/keyboard/
+// Toetsenbord
 document.addEventListener("keydown", (e) => {
-  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
-    if (e.altKey && e.code === "Space") {
+  // Tab: pauzeer audio zodat VoiceOver kan spreken
+  if (e.key === "Tab" && !audio.paused) {
+    audio.pause();
+    sounds.pauze();
+  }
+
+  const inVeld =
+    e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT";
+
+  if (inVeld) {
+    if (e.code === "Space") {
       e.preventDefault();
       togglePlay();
-      return;
     }
-    if (e.key === "Enter") sendReply();
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendReply();
+    }
     if (e.key === "Escape") {
       e.target.blur();
-      document.getElementById("playBtn").focus();
-      setStatus(
-        "Terug naar speler &nbsp;— <kbd>Alt</kbd>+<kbd>Spatie</kbd> om af te spelen",
-        "",
-      );
-      speak("Terug naar speler");
+      playBtn.focus();
     }
     return;
   }
 
   if (e.altKey) {
-    if (e.key === "ArrowRight") {
-      e.preventDefault();
-      goToNextMarker();
-    }
-    if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      goToPrevMarker();
-    }
+    if (e.key === "ArrowLeft")  { e.preventDefault(); goToPrevMarker(); }
+    if (e.key === "ArrowRight") { e.preventDefault(); goToNextMarker(); }
     return;
   }
 
@@ -318,19 +240,13 @@ document.addEventListener("keydown", (e) => {
       break;
     case "ArrowUp":
       e.preventDefault();
-      audio.playbackRate = Math.min(
-        2,
-        parseFloat((audio.playbackRate + 0.1).toFixed(1)),
-      );
-      setStatus("Snelheid: " + audio.playbackRate + "x", "");
+      speedIndex = (speedIndex + 1) % speeds.length;
+      audio.playbackRate = speeds[speedIndex];
       break;
     case "ArrowDown":
       e.preventDefault();
-      audio.playbackRate = Math.max(
-        0.5,
-        parseFloat((audio.playbackRate - 0.1).toFixed(1)),
-      );
-      setStatus("Snelheid: " + audio.playbackRate + "x", "");
+      speedIndex = (speedIndex - 1 + speeds.length) % speeds.length;
+      audio.playbackRate = speeds[speedIndex];
       break;
     case "m":
     case "M":
@@ -340,8 +256,6 @@ document.addEventListener("keydown", (e) => {
     case "R":
       e.preventDefault();
       audio.pause();
-      setStatus("Typ je reactie en druk Enter om te versturen", "");
-      speak("Typ je reactie");
       document.getElementById("replyInput").focus();
       break;
   }

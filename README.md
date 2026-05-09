@@ -218,3 +218,22 @@ Screen reader gedrag fixen zodat hij niet door de UI heen praat. Spatie omzetten
 In week 4 heb ik alle bugs uit de test van dinsdag gefixed. De drie grootste verbeteringen: de screenreader leest niet meer door de hele interface heen, de markeernavigatie werkt nu. Tot slot is de shortcutlegenda naar boven verplaatst.
 
 Er zijn nog een paar fouten is dat de screan reader over de text gaat van de gebruiker als de gebruiker iets markeert of terug markeert. Hier moet ik nog even naar kijken.
+
+---
+
+## Verbeterd voor herkansing
+
+**Probleem 1 — screen reader praatte door de audio heen**
+`speechSynthesis` volledig verwijderd. Tab pauzeert de audio automatisch zodat VoiceOver nooit tegelijk met de audio spreekt.
+
+**Probleem 2 — screen reader zei te veel**
+Decoratieve elementen (waveform, tijdsduur, progress bar) gemarkeerd met `aria-hidden`. Overbodige live regions en status updates verwijderd.
+
+**Probleem 3 — HTML-structuur klopte niet**
+Pagina opnieuw opgebouwd met correcte semantische structuur: `<h1>` voor de paginatitel en duidelijke labels op alle interactieve elementen.
+
+**Probleem 4 — VoiceOver zei te veel bij de play knop**
+De play knop is veranderd van een `<button>` naar een `<div>` met `tabindex="0"`. Een button triggert altijd VoiceOver hints ("Je bevindt je momenteel op een knop..."). Een div niet. VoiceOver zegt nu alleen "Afspelen" en zwijgt daarna.
+
+**Probleem 5 — sneltoetsen niet vindbaar**
+Er staat een apart tekstelement vóór de play knop in de tab-volgorde. Als Ihab door de pagina navigeert hoort hij eerst de sneltoetsen, daarna de play knop.

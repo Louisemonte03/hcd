@@ -3,16 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Voicebericht Navigator</title>
+    <title>Chat met Lilly</title>
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
     <div class="layout">
-
       <aside class="shortcuts" aria-hidden="true">
         <p class="sc-title">sneltoetsen</p>
         <ul class="sc-list">
-          <li><kbd>Alt</kbd>+<kbd>⎵</kbd> play/pause</li>
+          <li><kbd>⎵</kbd> play/pause</li>
           <li><kbd>←</kbd> 5s terug</li>
           <li><kbd>→</kbd> 5s vooruit</li>
           <li><kbd>↑↓</kbd> snelheid</li>
@@ -27,84 +26,81 @@
 
       <main class="wa-shell">
         <header class="wa-header">
-          <div class="wa-avatar" aria-hidden="true">S</div>
-          <div>
-            <p class="wa-header-name">Lilly</p>
-            <p class="wa-header-sub" id="headerSub" aria-hidden="true">WhatsApp prototype</p>
-          </div>
+          <div class="wa-avatar" aria-hidden="true">L</div>
+          <h1 class="wa-header-name">Chat met Lilly</h1>
         </header>
 
         <div class="wa-chat" id="waChat">
-          <div class="bubble-wrap">
-            <div
-              class="voice-bubble"
-              role="region"
-              aria-label="Voicebericht van Lilly"
-            >
-              <audio id="audio" src="sounds/audio.mp3" preload="metadata" aria-hidden="true"></audio>
+          <!-- Voicebericht -->
+          <section aria-labelledby="voiceKop">
+            <div class="bubble-wrap">
+              <div class="voice-bubble">
+                <audio
+                  id="audio"
+                  src="sounds/audio.mp3"
+                  preload="metadata"
+                ></audio>
 
-              <div class="voice-top">
-                <button
-                  class="play-btn"
-                  id="playBtn"
-                  onclick="togglePlay()"
-                  aria-label="Afspelen"
-                  aria-pressed="false"
-                >
-                  &#9654;
-                </button>
-                <div class="waveform" id="waveform" aria-hidden="true"></div>
-                <span class="voice-duration" id="durationLabel" aria-hidden="true">0:00</span>
+                <p class="sr-only" tabindex="0">Sneltoetsen: Spatie play of pauze, pijl links 5 seconden terug, pijl rechts 5 seconden vooruit, pijl omhoog sneller, pijl omlaag langzamer, M markeren, Alt pijl links vorige markering, Alt pijl rechts volgende markering, R reageren.</p>
+
+                <div class="voice-top">
+                  <div
+                    class="play-btn"
+                    id="playBtn"
+                    tabindex="0"
+                    aria-label="Afspelen"
+                  >
+                    &#9654;
                   </div>
-
-              <div class="progress-wrap" aria-hidden="true">
-                <div
-                  class="progress-bar"
-                  id="progressBar"
-                >
-                  <div class="progress-fill" id="progressFill"></div>
+                  <div class="waveform" id="waveform" aria-hidden="true"></div>
+                  <span
+                    class="voice-duration"
+                    id="durationLabel"
+                    aria-hidden="true"
+                    >0:00</span
+                  >
                 </div>
+
+                <div class="progress-wrap" aria-hidden="true">
+                  <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                  </div>
+                </div>
+
+                <!-- <div role="group" aria-label="Sneltoetsen: Ctrl+Spatie play, Ctrl+pijltjes spoelen, M markeren" class="sr-only">
+                  <button onclick="skip(-5)">5 seconden terug</button>
+                  <button onclick="skip(5)">5 seconden vooruit</button>
+                  <button id="speedBtn">Snelheid: 1x</button>
+                  <button onclick="markMoment()">Markeer dit moment</button>
+                </div> -->
+
+                <ul id="markersRow" class="markers-row" aria-hidden="true"></ul>
               </div>
-
-              <div
-                class="markers-row"
-                id="markersRow"
-                aria-label="Markeringen"
-              ></div>
+              <span class="bubble-time" aria-hidden="true">14:23</span>
             </div>
-            <span class="bubble-time">14:23</span>
-          </div>
+          </section>
 
-          <div class="bubble-wrap sent" id="replyWrap" style="display: none">
-            <div
-              class="reply-bubble"
-              id="replyBubble"
-              role="status"
-              aria-live="polite"
-            ></div>
-            <span class="bubble-time" id="replyTime"></span>
+          <!-- Verstuurde reactie -->
+          <div
+            class="bubble-wrap sent"
+            id="replyWrap"
+            style="display: none"
+            aria-live="polite"
+          >
+            <div class="reply-bubble" id="replyBubble"></div>
+            <span class="bubble-time" id="replyTime" aria-hidden="true"></span>
           </div>
         </div>
 
-        <div
-          class="status-bar"
-          id="statusBar"
-        >
-          Druk <kbd>Alt</kbd>+<kbd>Spatie</kbd> om af te spelen
-        </div>
-
+        <!-- Reageren -->
         <div class="reply-input-row">
           <textarea
             id="replyInput"
-            placeholder="Typ een reactie..."
-            aria-label="Typ een reactie"
+            aria-label="Typ je reactie aan Lilly"
             rows="3"
           ></textarea>
-          <button onclick="sendReply()" aria-label="Verstuur reactie">
-            &#9658;
-          </button>
+          <button id="sendBtn" onclick="sendReply()">Verstuur</button>
         </div>
-
       </main>
     </div>
 
